@@ -25,7 +25,7 @@ public class Exam0822 {
         // 위쪽 case에서 선언한 변수는 switch 문에 소속된다.
         // 따라서 다음과 같이 아래쪽 case에서 
         // 같은 이름의 변수를 선언할 수 없다.
-        //        int b; // 컴파일 오류!
+        // int b; // 컴파일 오류!
         int c; // OK!
 
         break;

@@ -1,6 +1,6 @@
 package com.eomcs.lang.ex04;
 
-//# 배열 - 배열이 필용할 때: 같은 종류의 메모리를 많이 다룰 경우 
+//# 배열 - 배열이 필요할 때: 같은 종류의 메모리를 많이 다룰 경우 
 //
 public class Exam0521 {
   public static void main(String[] args) {
