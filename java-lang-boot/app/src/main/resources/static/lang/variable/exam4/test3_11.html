@@ -23,12 +23,14 @@ xBtn.addEventListener("click", function() {
   // 서버에서 응답을 받았을 때(load 이벤트 발생) 호출될 함수를 등록한다.
   xhr.onload = function() {
     // 서버에서 받은 JSON 형식의 배열을 자바스크립트 배열로 변환한다.
-	  var names = JSON.parse(xhr.responseText);
-	  for (var name of names) {
-		  var li = document.createElement("li"); // <li><li>
-		  li.innerHTML = name; // <li>홍길동<li>
-		  xNamelist.appendChild(li);
-	  }
+    var names = JSON.parse(xhr.responseText);
+    
+    // 반복문을 직접 실행하는 대신에 그 일을 할 함수를 호출한다.
+    forEach(names, function(name) {
+      var li = document.createElement("li"); // <li><li>
+      li.innerHTML = name; // <li>홍길동<li>
+      xNamelist.appendChild(li);
+    })
   };
   
   // 서버와 연결한다.
@@ -41,6 +43,12 @@ xBtn.addEventListener("click", function() {
   // 서버에 요청 정보를 보낸다.
   xhr.send();
 });
+
+function forEach(arr, cb) {
+  for (var item of arr) {
+    cb(item);
+  }
+}
 
 </script>
 

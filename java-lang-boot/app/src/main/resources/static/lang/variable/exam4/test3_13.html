@@ -17,18 +17,31 @@ var xNamelist = document.querySelector("#x-namelist");
 var xBtn = document.querySelector("#x-btn");
 
 xBtn.addEventListener("click", function() {
-  // 서버에 요청할 때 사용할 도구를 준비한다.
+	
+	var result = fetch("/lang/variable/exam4/test3");
+	var result2 = result.then(function(response) {
+		return response.json();
+	});
+	result2.then(function(jsonData) {
+		console.log(jsonData)
+	});
+	
+  /*
+	// 서버에 요청할 때 사용할 도구를 준비한다.
   var xhr = new XMLHttpRequest();
   
   // 서버에서 응답을 받았을 때(load 이벤트 발생) 호출될 함수를 등록한다.
   xhr.onload = function() {
     // 서버에서 받은 JSON 형식의 배열을 자바스크립트 배열로 변환한다.
-	  var names = JSON.parse(xhr.responseText);
-	  for (var name of names) {
-		  var li = document.createElement("li"); // <li><li>
-		  li.innerHTML = name; // <li>홍길동<li>
-		  xNamelist.appendChild(li);
-	  }
+    var names = JSON.parse(xhr.responseText);
+    
+    // 반복문을 직접 실행하는 대신에 그 일을 할 함수를 호출한다.
+    // 배열에 내장된(built-in) forEach() 사용하기
+    names.forEach(function(name) {
+      var li = document.createElement("li"); // <li><li>
+      li.innerHTML = name; // <li>홍길동<li>
+      xNamelist.appendChild(li);
+    })
   };
   
   // 서버와 연결한다.
@@ -40,6 +53,7 @@ xBtn.addEventListener("click", function() {
       
   // 서버에 요청 정보를 보낸다.
   xhr.send();
+  */  
 });
 
 </script>
