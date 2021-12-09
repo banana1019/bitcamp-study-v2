@@ -11,9 +11,9 @@ public class Exam0150 {
     // 들여쓰기에 속지 말라!
     if (age >= 19)
       if (age >= 70) 
-        System.out.println("지하철 무임승차 가능합니다.");
-    else  
-      System.out.println("미성년입니다.");
+        System.out.println("지하철 무임승차 가능합니다.1");
+      else  
+        System.out.println("미성년입니다.1");
 
     System.out.println("------------------------------");
 
@@ -30,9 +30,9 @@ public class Exam0150 {
 
     if (age >= 19) { 
       if (age >= 70) 
-        System.out.println("지하철 무임승차 가능합니다.");
+        System.out.println("지하철 무임승차 가능합니다.2");
       else 
-        System.out.println("미성년입니다.");
+        System.out.println("미성년입니다.2");
     }
 
     System.out.println("------------------------------");
@@ -41,9 +41,9 @@ public class Exam0150 {
     // 다음과 같이 두 번재 if 문을 블록으로 묶어라!
     if (age >= 19) {
       if (age >= 70) 
-        System.out.println("지하철 무임승차 가능합니다.");
+        System.out.println("지하철 무임승차 가능합니다.4");
     }
     else // 두 번째 if는 첫 번째 if 블록에 묶여있기 때문에 이 else와 상관없다. 
-      System.out.println("미성년입니다.");
+      System.out.println("미성년입니다.3");
   }
 }

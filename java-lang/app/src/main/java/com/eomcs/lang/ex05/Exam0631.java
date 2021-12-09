@@ -23,7 +23,7 @@ public class Exam0631 {
     //    => i <===== 7 실행
     //    => 다시 i는 8에서 7로 바뀌었다.
 
-    System.out.println(i);
+    System.out.println(i); // 7
 
   }
 }
