@@ -7,10 +7,11 @@ public class Exam0631 {
     int i = 7;
 
     i = i++;
+
     // 위 문장은 다음과 같이 실행된다.
-    //int temp = i;
-    //i = i + 1;
-    //i = temp;
+    // int temp = i;
+    // i = i + 1;
+    // i = temp;
     //
     // 1) i 값을 그자리에 놓는다.
     //    => i = 7;

@@ -1,11 +1,16 @@
 package com.eomcs.lang.ex99;
 
+import java.io.IOException;
+
 //# 키보드 입력 받기 - System.in 과 java.util.Scanner
 //
 public class Exam0210 {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     // 1) 키보드로 입력한 데이터를 읽을 때 사용할 도구를 준비한다.
     java.io.InputStream keyboard = System.in;
+
+    //    keyboard.read();
+    System.out.println((char)keyboard.read());
 
     // 2) InputStream은 바이트 단위로 읽는 기능이 있다.
     //    바이트 단위로 읽어서 int나 문자열로 바꾸려면 또 코딩해야 하는 불편함이 있다.

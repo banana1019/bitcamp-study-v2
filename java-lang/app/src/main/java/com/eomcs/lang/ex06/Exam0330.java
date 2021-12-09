@@ -17,7 +17,7 @@ public class Exam0330 {
         y++;
       }
 
-      System.out.println();
+      System.out.println(); // 한 줄 띄우기 용
       x++;
       y = 1;
     }
