@@ -16,4 +16,10 @@ public class ContactController {
     return contacts;
   };
 
+  @GetMapping("/contact/add")
+  public Object add(String name, String email, String tel, String company) {
+    String contact = name + "," + email + "," + tel + "," + company;
+    return contact;
+  };
+
 };
