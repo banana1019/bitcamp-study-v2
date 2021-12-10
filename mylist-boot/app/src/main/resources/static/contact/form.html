@@ -7,15 +7,23 @@
 <body>
   <h1>새 연락처</h1>
   <form>
-    이름: <input type="text"><br>
-    이메일: <input type="email"><br>
-    전화: <input type="tel"><br>
-    회사: <input type="text"><br>
-    <button type="button">추가</button>
-    <button type="button">취소</button>
+    이름: <input id="x-name" type="text"><br>
+    이메일: <input id="x-email" type="email"><br>
+    전화: <input id="x-tel" type="tel"><br>
+    회사: <input id="x-company" type="text"><br>
+    <button id="x-add-btn" type="button">추가</button>
+    <button id="x-cancel-btn" type="button">취소</button>
   </form>
 
   <script type="text/javascript">
+  document.querySelector("")
+  document.querySelector("#x-add-btn").onclick = function() {
+    console.log("추가!")
+  };
+
+  document.querySelector("#x-cancel-btn").onclick = function() {
+    window.location.href = "index.html"
+  };
 
   </script>
 </body>
