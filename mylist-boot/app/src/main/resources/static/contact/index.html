@@ -26,8 +26,8 @@
         return response.json();
       }).then(function(arr){
         for (var str of arr) {
-          console.log(str);
-          var contact = str.split(",");
+          console.log(str); // 예) "홍길동1,hong@test.com,010-1111-2222,비트캠프"
+          var contact = str.split(","); // 예) ["홍길동1","hong@test.com","010-1111-2222","비트캠프"]
           var tr = document.createElement("tr");
           tr.innerHTML = `<td><a href="view.html?email=${contact[1]}">${contact[0]}</a></td>
             <td>${contact[1]}</td>
