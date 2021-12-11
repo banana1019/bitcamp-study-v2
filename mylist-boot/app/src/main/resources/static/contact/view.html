@@ -57,14 +57,6 @@
     xCompany.value = contact[3];
   })
 
-  var result = "홍길동, hong@test.com, 010-1111-2222, 비트캠프";
-
-  var contact = result.split(",");
-  xName.value = contact[0];
-  xEmail.value = contact[1];
-  xTel.value = contact[2];
-  xCompany.value = contact[3];
-
   document.querySelector("#x-update-btn").onclick = function() {
     fetch(`/contact/add?name=${xName.value}&email=${xEmail.value}&tel=${xTel.value}&company=${xCompany.value}`)
       .then(function(response) {
