@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>도서 목록</title>
+</head>
+<body>
+  <h1>📚 도서 목록</h1>
+  <a href="form.html">도서 추가</a>
+  <table id="x-book-table" border="1">
+    <thead>
+      <tr>
+        <th>도서명</th>
+        <th>저자</th>
+        <th>출판사</th>
+        <th>가격</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+
+  <script type="text/javascript">
+  var tbody = document.querySelector("#x-book-table")
+
+  fetch("/my1/list")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(books) {
+      console.log(books);
+      for (var book of books) {
+        var values = book.split(",");
+        var tr = document.createElement("tr");
+        tr.innerHTML = `<td><a href="view.html?title=${values[0]}">${values[0]}</a></td>
+        <td>${values[1]}</td>
+        <td>${values[2]}</td>
+        <td>${values[3]}</td>`
+        console.log(tr);
+        tbody.appendChild(tr);
+      }
+    });
+
+  </script>
+</body>
+</html>
