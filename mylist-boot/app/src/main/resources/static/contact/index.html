@@ -1,41 +1,68 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>연락처</title>
-  </head>
-  <body>
-    <h1>연락처</h1>
-    <a href="form.html">새 연락처</a>
-    <table id="x-contact-tbl" border="1">
-      <thead>
-        <tr>
-          <th>이름</th>
-          <th>이메일</th>
-          <th>전화</th>
-          <th>회사</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-    <script type="text/javascript">
-      var tbody = document.querySelector("#x-contact-tbl tbody");
+<head>
+  <meta charset="utf-8">
+  <title>연락처</title>
+</head>
+<body>
+<h1>연락처</h1>
+<a href="form.html">새 연락처</a>
+<table id="x-contact-table" border="1">
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>이메일</th>
+      <th>전화</th>
+      <th>회사</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<script type="text/javascript">
 
-      fetch("/contact/list").then(function(response){
-        return response.json();
-      }).then(function(arr){
-        for (var str of arr) {
-          console.log(str); // 예) "홍길동1,hong@test.com,010-1111-2222,비트캠프"
-          var contact = str.split(","); // 예) ["홍길동1","hong@test.com","010-1111-2222","비트캠프"]
-          var tr = document.createElement("tr");
-          tr.innerHTML = `<td><a href="view.html?email=${contact[1]}">${contact[0]}</a></td>
-            <td>${contact[1]}</td>
-            <td>${contact[2]}</td>
-            <td>${contact[3]}</td>`;
-          tbody.appendChild(tr);
-        }
-      });
-    </script>
-  </body>
+  var tbody = document.querySelector("#x-contact-table tbody")
+
+  fetch("/contact/list").then(function(response){
+  return response.json();
+}).then(function(contacts) {
+  console.log(contacts)
+  for (var contact of contacts) {
+    console.log(contact); // 예) "홍길동1,hong@test.com,010-1111-2222,비트캠프"
+    var values = contact.split(","); // 예) ["홍길동1","hong@test.com","010-1111-2222","비트캠프"]
+    var tr = document.createElement("tr");
+    tr.innerHTML = `<td><a href="view.html?email=${values[1]}">${values[0]}</a></td>
+      <td>${values[1]}</td>
+      <td>${values[2]}</td>
+      <td>${values[3]}</td>`;
+    tbody.appendChild(tr);
+  }
+});
+
+  // fetch("/contact/list")
+  //   .then(response => {
+  //     // console.log(response)
+  //     // console.log(response.json())
+  //     response.json();
+  //   })
+  //   .then(contacts => {
+  //     console.log(contacts)
+  //     for (var contact of contacts) {
+  //       var values = contact.split(",");
+  //       var tr = document.createElement("tr");
+  //       tr.innerHTML = `<td>${values[0]}</td>
+  //       <td>${values[1]}</td>
+  //       <td>${values[2]}</td>
+  //       <td>${values[3]}</td>`
+  //       tbody.appendChild(tr);
+  //     }
+  //   })
+    // .catch(error => console.error(error));
+    // .cath(error => {
+    //   alert("서버 실행 오류입니다.")
+    //   console.log(error);
+    // })
+
+</script>
+</body>
 </html>

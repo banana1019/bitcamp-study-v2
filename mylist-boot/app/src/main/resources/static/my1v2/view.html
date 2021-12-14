@@ -18,6 +18,7 @@
 <body>
   <h1>도서 추가</h1>
   <form>
+    id: <input id="x-id" type="text"><br>
     도서명* : <input id="x-title" type="text"><br>
     저자* : <input id="x-author" type="text"><br>
     출판사 : <input id="x-publisher" type="text"><br>
@@ -44,7 +45,7 @@
 
     // 2) 쿼리 스트링에서 title 값을 추출한다.
     var params = new URLSearchParams(qs);
-    var title = params.get("title");
+    var id = params.get("id");
 
     // var title = null;
     // var values = qs.split("&");
@@ -55,30 +56,32 @@
     //   }
     // }
 
-    if (title == null) {
+    if (id == null) {
       alert("도서명 값이 없습니다.");
       throw "파라미터 오류!";
     }
 
-    console.log(title);
+    console.log(id);
 
+    var xId = document.querySelector("#x-id");
     var xTitle = document.querySelector("#x-title");
     var xAuthor = document.querySelector("#x-author");
     var xPublisher = document.querySelector("#x-publisher");
     var xPrice = document.querySelector("#x-price");
 
     // 3) 서버에서 데이터 가져오기
-    fetch(`/my1/get?title=${title}`)
+    fetch(`/my1/get?id=${id}`)
       .then(function(response) {
         return response.text();
       })
       .then(function(book) {
         // 4) 도서 상세 정보를 화면에 출력한다.
         var values = book.split(",");
-        xTitle.value = values[0];
-        xAuthor.value = values[1];
-        xPublisher.value = values[2];
-        xPrice.value = values[3];
+        xId.value = values[0];
+        xTitle.value = values[1];
+        xAuthor.value = values[2];
+        xPublisher.value = values[3];
+        xPrice.value = values[4];
       })
 
     // var book = "도서명1,김작가,출판사1,5000";
@@ -96,7 +99,7 @@
         return;
       }
 
-      fetch(`/my1/update?title=${xTitle.value}&author=${xAuthor.value}&publisher=${xPublisher.value}&price=${xPrice.value}`)
+      fetch(`/my1/update?id=${xId.value}title=${xTitle.value}&author=${xAuthor.value}&publisher=${xPublisher.value}&price=${xPrice.value}`)
         .then(function(response) {
           return response.text();
         })
@@ -111,7 +114,7 @@
     };
 
     document.querySelector("#x-delete-btn").onclick = function() {
-      fetch(`/my1/delete?title=${title}`)
+      fetch(`/my1/delete?id=${id}`)
         .then(function(response) {
           return response.json();
         })

@@ -1,39 +1,67 @@
 package com.eomcs.mylist;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController // 클라이언트 요청을 처리하는 역할
+@RestController 
+// 이 클래스가 클라이언트 요청 처리 담당자임을 표시한다.
+// 이 표시(애노테이션)가 붙어있어야만 스프링 부트가 인식한다.
 public class ContactController {
 
-  // 인스턴스 변수
-  // => 모든 인스턴스 메소드가 공유한다.
   String[] contacts = new String[5];
   int size = 0;
 
-  @GetMapping("/contact/list")
+  @RequestMapping("/contact/list")
   public Object list() {
-    String[] records = new String[size];
+    String[] arr = new String[size]; // 배열에 저장된 값만 복사할 새 배열을 만든다.
     for (int i = 0; i < size; i++) {
-      records[i] = contacts[i];
+      arr[i] = contacts[i]; // 전에 배열에서 값이 들어 있는 항목만 복사한다.
     }
-    return records;
+    return arr; // 복사한 항목들을 담고 있는 새 배열을 리턴한다.
   };
 
-  @GetMapping("/contact/add")
+  @RequestMapping("/contact/add")
   public Object add(String name, String email, String tel, String company) {
-    contacts[size++] = name + "," + email + "," + tel + "," + company;
+    String contact = name + "," + email + "," + tel + "," + company;
+    contacts[size++] = contact;
     return size;
-  };
+  }
 
-  @GetMapping("/contact/get")
+  @RequestMapping("/contact/get")
   public Object get(String email) {
     for (int i = 0; i < size; i++) {
-      if (email.equals(contacts[i].split(",")[1])) {
+      if (contacts[i].split(",")[1].equals(email)) {
         return contacts[i];
       }
     }
     return "";
-  };
+  }
 
-};
+  @RequestMapping("/contact/update")
+  public Object update(String name, String email, String tel, String company) {
+    String contact = name + "," + email + "," + tel + "," + company;
+    for (int i = 0; i < size; i++) {
+      if (contacts[i].split(",")[1].equals(email)) {
+        contacts[i] = contact;
+        return 1;
+      }
+    }
+    return 0;
+  }
+
+  @RequestMapping("/contact/delete")
+  public Object delete(String email) {
+    for (int i = 0; i < size; i++) {
+      if (contacts[i].split(",")[1].equals(email)) {
+        // 현재 위치의 다음 항목에서 배열끝까지 반복하여 앞으로 값을 당겨온다.
+
+        for (int j = i + 1; j < size; j++) {
+          contacts[j-1] = contacts[j];
+        }
+        size--;
+        return 1; 
+      }
+    }
+    return 0;
+  }
+}
