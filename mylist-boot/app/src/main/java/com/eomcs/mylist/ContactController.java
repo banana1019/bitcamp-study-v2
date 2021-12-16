@@ -22,7 +22,7 @@ public class ContactController {
 
   @RequestMapping("/contact/add")
   public Object add(String name, String email, String tel, String company) {
-    String contact = name + "," + email + "," + tel + "," + company;
+    String contact = createCSV(name, email, tel, company);
     contacts[size++] = contact;
     return size;
   }
@@ -63,5 +63,9 @@ public class ContactController {
       }
     }
     return 0;
+  }
+
+  String createCSV(String name, String email, String tel, String company) {
+    return name + "," + email + "," + tel + "," + company;
   }
 }
