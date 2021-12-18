@@ -22,6 +22,9 @@ public class ContactController {
 
   @RequestMapping("/contact/add")
   public Object add(String name, String email, String tel, String company) {
+    if (size == contacts.length) {   // 배열이 꽉 찼다면,
+      contacts = grow(); // 메서드 이름에서 해당 코드에 대한 설명을 짐작할 수 있다.
+    }
     contacts[size++] = createCSV(name, email, tel, company);
     return size;
   }
@@ -55,7 +58,7 @@ public class ContactController {
       return 0;
     }
 
-    remove(index);
+    remove(index);  // 메서드 이름으로 코드의 의미를 짐작할 수 있다. 이것이 메서드로 분리하는 이유이다.
     return 1;
 
   }
@@ -89,6 +92,37 @@ public class ContactController {
     }
     size--;
     return old;
+  }
+
+  // 기능:
+  // - 배열의 크기를 늘린다.
+  // - 기존 배열의 값을 복사해온다.
+  //
+  String[] grow() {
+    String[] arr = new String[newLength()];
+    copy(contacts, arr);
+    return arr;
+  }
+
+  // 기능:
+  // - 주어진 배열에 대해 50% 증가시킨 새 배열의 길이를 알려준다.
+  int newLength() {
+    return contacts.length + (contacts.length >> 1);
+  }
+
+  // 기능:
+  // - 배열을 복사한다.
+  //
+  void copy(String[] source, String[] target) {
+    // 개발자가 잘못 사용할 것을 대비하여 다음 코드를 추가한다.
+    // 즉 target 배열이 source 배열보다 작을 경우 target 배열 크기만큼만 복사한다.
+    int length = source.length;
+    if (target.length < source.length) {
+      length = target.length;
+    }
+    for (int i = 0; i < length; i++) {
+      target[i] = source[i];
+    }
   }
 
 }
