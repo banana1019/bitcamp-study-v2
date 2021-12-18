@@ -33,6 +33,9 @@ public class Exam0270 {
 
   public static void main(String[] args) {
     // 컴파일 확인하라!
+
+    // 가변 파라미터 사용 예
+    System.out.printf("==> %s", "aaa");
   }
 }
 
@@ -40,5 +43,3 @@ public class Exam0270 {
 // - 메서드에 가변 파라미터는 한 개만 사용할 수 있다.
 // - 가변 파라미터는 반드시 맨 뒤에 와야 한다.
 // - 그 이유는 복잡한 사용을 막기 위해!
-
-
