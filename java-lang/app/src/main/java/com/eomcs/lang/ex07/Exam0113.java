@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 // 1단계: 공백 출력 코드를 메서드로 추출하기
 // 2단계: 별을 출력하는 코드를 메서드로 추출하기
-// 3단계: while 대신 for 문 사용하기
+// 3단계: while 대신 for문 사용하기
 // 
 public class Exam0113 {
 

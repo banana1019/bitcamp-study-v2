@@ -29,7 +29,6 @@ public class Exam0250 {
 
     // 가변 파라미터 자리에 배열을 직접 넣어도 된다.
     String[] arr = {"김구", "안중근", "윤봉길", "유관순"};
-
     hello(arr);
     System.out.println("-------------------");
 
