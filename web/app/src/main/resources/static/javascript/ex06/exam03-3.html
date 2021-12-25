@@ -24,7 +24,9 @@ var btnClick = function(e) {
 	alert("===> " + this.getAttribute("data-no"));
 	alert("===> " + e.target.getAttribute("data-no"));
 	for (var e of el2) {
-		e.style["background-color"] = "yellow";
+		// e.style["background-color"] = "yellow";
+		// e.style["color"] = "blue";
+		e.style["border"] = "1px dashed blue";
 	}
 };
 
@@ -35,8 +37,3 @@ for (var e of el) {
 </script>
 </body>
 </html>
-
-
-
-
-
