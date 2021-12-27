@@ -94,6 +94,7 @@
     }
 
     function updateTodo(no) {
+      titleInput.style["display"] = "";
       // 현재 Todo 항목을 편집중인 상태에서 변경 버튼을 눌렀다면
       if (titleInput.parentNode instanceof HTMLTableCellElement) {
         // 다른 항목을 편집하기 위해 이동하기 전에 편집 전의 상태로 되돌린다.
@@ -105,29 +106,6 @@
       titleInput.value = titleSpan.innerHTML;
       titleTd.appendChild(titleInput);
     }
-
-    // titleInput.onkeyup = function(e) {
-    //   // console.log(e.keyCode);
-    //   var no = titleInput.parentNode.getAttribute("data-no");
-    //   var originTitle = titleInput.parentNode.querySelector("span").innerHTML;
-    //   if (e.keyCode == 13 && titleInput.value != "" && originTitle != titleInput.value) {
-    //     fetch(`/todo/update?index=${no}&title=${titleInput.value}`)
-    //     .then(function(response) {
-    //       return response.json();
-    //     })
-    //     .then(function(result) {
-    //       if (result == 0) {
-    //         window.alert("변경하지 못했습니다!");
-    //       } else {
-    //         console.log("변경했습니다!")
-    //         titleInput.parentNode.querySelector("span").innerHTML = titleInput.value;
-    //         titleInput.parentNode.querySelector("span").style["display"] = "";
-    //         titleInput.style["display"] = "none";
-    //         document.body.appendChild(titleInput);
-    //       }
-    //     });
-    //   }
-    // };
 
     titleInput.onkeyup = function(e) {
       // console.log(e.keyCode);
@@ -146,7 +124,6 @@
             titleInput.parentNode.querySelector("span").innerHTML = titleInput.value;
             titleInput.parentNode.querySelector("span").style["display"] = "";
             titleInput.style["display"] = "none";
-            // titleSpan.style["display"] = "none";
             document.body.appendChild(titleInput);
           }
         });
