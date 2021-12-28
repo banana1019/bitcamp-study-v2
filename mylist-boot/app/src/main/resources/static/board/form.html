@@ -37,13 +37,24 @@
   제목* : <input id="x-title" type="text"><br>
   내용* : <input id="x-content" type="text"><br>
   조회 : <input id="x-view" type="text" value=0 readonly><br>
-  작성일 : <input id="x-created" type="date" value="2021-12-29"><br>
+  작성일 : <input id="x-created" type="date"><br>
+  <!-- 작성일 : <input id="x-created" type="date" value="2021-12-29"><br> -->
   별표(*) 항목은 필수 입력입니다.<br>
   <button id="x-add-btn" type="button">등록</button>
   <button id="x-cancel-btn" type="button">취소</button>
 </form>
 
 <script type="text/javascript">
+
+let today = new Date();
+console.log(today);
+let year = today.getFullYear(); // 년
+let month = today.getMonth() + 1;  // 월
+let date = today.getDate();  // 일
+today = year + '-' + month + '-' + date;
+console.log(today);
+document.getElementById('x-created').value = today;
+
   var xTitle = document.querySelector("#x-title");
   var xContent = document.querySelector("#x-content");
   var xView = document.querySelector("#x-view");
