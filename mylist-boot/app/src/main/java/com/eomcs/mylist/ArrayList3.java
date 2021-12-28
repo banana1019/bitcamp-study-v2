@@ -1,6 +1,6 @@
 package com.eomcs.mylist;
 
-public class ArrayList2 {
+public class ArrayList3 {
 
   static Object[] list = new Object[5];
   static int size = 0;

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>📝 게시판</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<h1>📝 게시판</h1>
+<a href="form.html"><i class="fas fa-pencil-alt"></i>새 글쓰기</a>
+<table id="x-post-table" border="1">
+  <thead>
+    <tr>
+      <th>제목</th>
+      <th>내용</th>
+      <th>조회</th>
+      <th>작성일</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<script type="text/javascript">
+
+  var tbody = document.querySelector("#x-post-table tbody")
+
+  // fetch("/board/list")
+  //   .then(function(response) {
+  //     return response.json();
+  //   })
+  //   .then(function(posts) {
+  //     console.log(posts);
+  //     for (var post of posts) {
+  //       var tr = document.createElement("tr");
+  //       tr.innerHTML = `<td><a href="view.html?title=${post.title}">${post.title}</a></td>
+  //       <td>${post.content}</td>
+  //       <td>${post.view}</td>
+  //       <td>${post.created}</td>`;
+  //       tbody.appendChild(tr);
+  //     }
+  //   });
+
+  fetch("/board/list")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(posts) {
+      console.log(posts);
+      for (let i = 0; i < posts.length; i++) {
+        var tr = document.createElement("tr");
+        var post = posts[i];
+        tr.setAttribute("data-idx", i)
+        tr.innerHTML = `<td><a href="view.html?title=${post.title}">${post.title}</a></td>
+        <td>${post.content}</td>
+        <td class="view-count">${post.view}</td>
+        <td>${post.created}</td>`;
+        tbody.appendChild(tr);
+      }
+    });
+
+</script>
+<script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
+</body>
+</html>
