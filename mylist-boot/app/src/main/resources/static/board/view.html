@@ -30,7 +30,7 @@
   var qs = arr[1];
   console.log(qs);
 
-  // 2) 쿼리 스트링에서 content 값을 추출한다.
+  // 2) 쿼리 스트링에서 email 값을 추출한다.
   var params = new URLSearchParams(qs)
   var index = params.get("index");
 
@@ -38,6 +38,7 @@
     alert("게시물 번호가 없습니다.");
     throw "파라미터 오류"
   }
+
   console.log(index);
 
   var xTitle = document.querySelector("#x-title");
