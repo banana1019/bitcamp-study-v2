@@ -3,13 +3,13 @@ package com.eomcs.mylist;
 public class Board {
   String title;
   String content;
-  int view;
-  java.sql.Date created;
+  int viewCount;
+  java.sql.Date createdDate;
 
   @Override
   public String toString() {
-    return "Board [title=" + title + ", content=" + content + ", view=" + view
-        + ", created=" + created + "]";
+    return "Board [title=" + title + ", content=" + content + ", viewCount=" + viewCount
+        + ", createdDate=" + createdDate + "]";
   }
 
   public String getTitle() {
@@ -24,17 +24,17 @@ public class Board {
   public void setContent(String content) {
     this.content = content;
   }
-  public int getView() {
-    return view;
+  public int getViewCount() {
+    return viewCount;
   }
-  public void setView(int view) {
-    this.view = view;
+  public void setViewCount(int viewCount) {
+    this.viewCount = viewCount;
   }
-  public java.sql.Date getCreated() {
-    return created;
+  public java.sql.Date getCreatedDate() {
+    return createdDate;
   }
-  public void setCreated(java.sql.Date created) {
-    this.created = created;
+  public void setCreatedDate(java.sql.Date createdDate) {
+    this.createdDate = createdDate;
   }
 
 }

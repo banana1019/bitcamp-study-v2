@@ -2,15 +2,42 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>게시글</title>
+  <title>📝 게시판</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 10px;
+    }
+    a {
+      text-decoration: none;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    thead {
+      text-align: center;
+      background-color: #bbdefb;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #e0e0e0;
+    }
+    tbody td:nth-child(3)  {
+      text-align: center;
+    }
+    #write {
+      font-size: 1.2em;
+    }
+  </style>
 </head>
 <body>
-<h1>게시글 상세</h1>
+<h1>글 상세보기</h1>
 <form>
-  제목* : <input id="x-title" type="text"><br>
-  내용* : <textarea id="x-content" cols="60" rows="10"></textarea><br>
-  조회수 : <span id="x-view-count"></span><br>
-  등록일 : <span id="x-created-date"></span><br>
+  제목* : <input id="x-title" type="text" readonly><br>
+  내용* : <input id="x-content" type="text"><br>
+  조회 : <input id="x-view" type="text" readonly><br>
+  작성일 : <input id="x-created" type="text" readonly><br>
   별표(*) 항목은 필수 입력입니다.<br>
   <button id="x-update-btn" type="button">변경</button>
   <button id="x-delete-btn" type="button">삭제</button>
@@ -30,41 +57,43 @@
   var qs = arr[1];
   console.log(qs);
 
-  // 2) 쿼리 스트링에서 content 값을 추출한다.
+  // 2) 쿼리 스트링에서 email 값을 추출한다.
   var params = new URLSearchParams(qs)
-  var index = params.get("index");
+  var title = params.get("title");
 
-  if (index == null) {
-    alert("게시물 번호가 없습니다.");
+  if (title == null) {
+    alert("이메일 값이 없습니다.");
     throw "파라미터 오류"
   }
-  console.log(index);
+
+  console.log(title);
 
   var xTitle = document.querySelector("#x-title");
   var xContent = document.querySelector("#x-content");
-  var xViewCount = document.querySelector("#x-view-count");
-  var xCreatedDate = document.querySelector("#x-created-date");
+  var xView = document.querySelector("#x-view");
+  var xCreated = document.querySelector("#x-created");
 
   // 3) 서버에서 데이터 가져오기
-  fetch(`/board/get?index=${index}`)
+  fetch(`/board/get?title=${title}`)
     .then(function(response) {
       return response.json();
     })
-    .then(function(board) {
+    .then(function(post) {
       // 4) 연락처 상세 정보를 화면에 출력한다.
-      xTitle.value = board.title;
-      xContent.value = board.content;
-      xViewCount.innerHTML = board.viewCount;
-      xCreatedDate.innerHTML = board.createdDate;
+      xTitle.value = post.title;
+      xContent.value = post.content;
+      xView.value = parseInt(post.view)+1;
+      xCreated.value = post.created;
+      console.log(xTitle.value, xContent.value, xView.value, xCreated.value)
     })
 
   document.querySelector("#x-update-btn").onclick = function() {
-    if (xTitle.value == "" || xViewCount.value == "") {
+    if (xTitle.value == "" || xView.value == "") {
       window.alert("필수 입력 항목이 비어 있습니다.");
       return;
     }
 
-    fetch(`/board/update?index=${index}&title=${xTitle.value}&content=${xContent.value}`)
+    fetch(`/board/update?title=${xTitle.value}&content=${xContent.value}&view=${xView.value}&created=${xCreated.value}`)
       .then(function(response) {
         return response.text();
         // return response.json(); // json 형식의 문자열을 자바스크립트 객체로
@@ -77,11 +106,12 @@
   };
 
   document.querySelector("#x-cancel-btn").onclick = function() {
+    fetch(`/board/update?title=${xTitle.value}&content=${xContent.value}&view=${xView.value}&created=${xCreated.value}`)
     window.location.href = "index.html";
   };
 
   document.querySelector("#x-delete-btn").onclick = function() {
-    fetch(`/board/delete?index=${index}`)
+    fetch(`/board/delete?title=${title}`)
       .then(function(response) {
         return response.json();
       })
