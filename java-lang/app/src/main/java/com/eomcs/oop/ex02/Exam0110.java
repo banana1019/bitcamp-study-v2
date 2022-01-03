@@ -12,7 +12,7 @@ public class Exam0110 {
     // - new 명령으로 생성되는 변수이다.
     // - 데이터를 개별적으로 다루고 싶을 때 인스턴스 변수로 선언한다.
     //
-    String name;
+    String name; // 변수 또는 필드
     int kor;
     int eng;
     int math;

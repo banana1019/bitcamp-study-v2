@@ -11,22 +11,22 @@ public class ExamTest2 {
 
   static class Calculator {
 
-    static int result = 0;
+    int result = 0;
 
-    static void plus(int a) {
-      result += a;
+    static void plus(Calculator c, int a) {
+      c.result += a;
     }
 
-    static void minus(int a) {
-      result -= a;
+    static void minus(Calculator c, int a) {
+      c.result -= a;
     }
 
-    static void multiple(int a) {
-      result *= a;
+    static void multiple(Calculator c, int a) {
+      c.result *= a;
     }
 
-    static void divide(int a) {
-      result /= a;
+    static void divide(Calculator c, int a) {
+      c.result /= a;
     }
 
     static int abs(int a) {
@@ -36,13 +36,25 @@ public class ExamTest2 {
 
   public static void main(String[] args) {
 
-    Calculator.plus(2);
-    Calculator.plus(3);    
-    Calculator.minus(1);
-    Calculator.multiple(7);
-    Calculator.divide(3);
+    Calculator c1 = new Calculator();
+    Calculator c2 = new Calculator();
 
-    System.out.printf("result = %d\n", Calculator.result);
+    Calculator.plus(c1, 2);
+    Calculator.plus(c1, 3);    
+    Calculator.minus(c1, 1);
+    Calculator.multiple(c1, 7);
+    Calculator.divide(c1, 3);
+
+    Calculator.plus(c2, 2);
+    Calculator.plus(c2, 3);    
+    Calculator.minus(c2, 1);
+    Calculator.multiple(c2, 7);
+    Calculator.divide(c2, 3);
+
+    c1.result = 1;
+
+    System.out.printf("result = %d\n", c1.result);
+    System.out.printf("result = %d\n", c2.result);
   }
 
 
