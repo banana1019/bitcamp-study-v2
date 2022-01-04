@@ -3,6 +3,7 @@ package com.eomcs.oop.ex03;
 
 public class Exam0220 {
   static class A {
+
     int value;
 
     static void m1() {
@@ -51,7 +52,7 @@ public class Exam0220 {
     A obj2 = new A();
 
     // 인스턴스 메서드의 this 변수는 메서드를 호출할 때 전달한 인스턴스 주소 값을 가진다.
-    // 그래서 메서드가 호출될 때 마다 this 변수의 값이 바뀐다.
+    // 그래서 메서드가 호출될 때마다 this 변수의 값이 바뀐다.
     obj2.m2();
 
   }

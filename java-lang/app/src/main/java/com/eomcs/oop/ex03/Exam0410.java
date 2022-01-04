@@ -15,7 +15,7 @@ public class Exam0410 {
     int sum;
     float average;
 
-    // 생성자
+    // 생성자(constructor)
     // => 클래스 이름과 같은 이름으로 메서드를 만든다.
     // => 리턴 타입을 선언하지 않는다. 즉 값을 리턴하지 않는다.
     // => 인스턴스를 만들 때 자동 호출된다. 
@@ -47,6 +47,8 @@ public class Exam0410 {
     //    Score s2 = new Score;
 
     Score s3 = new Score();
+
+    // s3.Score(); // 생성자는 따로 호출할 수 없다!
   }
 }
 
