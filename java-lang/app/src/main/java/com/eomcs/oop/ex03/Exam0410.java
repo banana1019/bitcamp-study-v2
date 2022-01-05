@@ -26,7 +26,7 @@ public class Exam0410 {
     // => 생성된 인스턴스가 제대로 쓰일 수 있도록 유효한 값으로 초기화시키는 일을 한다.
     // => 다음과 파라미터가 없는 생성자가 기본 생성자이다.(default constructor)
     Score() {
-      System.out.println("Score()");
+      System.out.println("Score() 호출!");
     }
 
 
