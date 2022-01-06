@@ -13,6 +13,10 @@ public class TodoController {
   // Todo 객체 목록을 저장할 메모리를 준비한다.
   ArrayList todoList = new ArrayList();
 
+  public TodoController() {
+    System.out.println("TodoController() 호출됨!");
+  }
+
   @RequestMapping("/todo/list") // 클라이언트 요청을 다루는 역할
   public Object list() {
     return todoList.toArray(); // 복사한 항목들을 담고 있는 새 배열을 리턴한다.

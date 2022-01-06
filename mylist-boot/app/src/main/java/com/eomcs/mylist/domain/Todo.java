@@ -4,6 +4,10 @@ public class Todo {
   String title;
   boolean done;
 
+  public Todo() {
+    System.out.println("Todo() 호출됨!");
+  }
+
   @Override
   public String toString() {
     return "Todo [title=" + title + ", done=" + done + "]";

@@ -14,13 +14,19 @@ public class Exam0210 {
     System.out.println(s1.compareTo("Hello"));
     System.out.println(s1.compareTo("Hellq"));
 
-    System.out.println(s1.contains("ll"));
-    System.out.println(s1.contains("ee"));
+    System.out.println(s1.contains("ll")); // ture
+    System.out.println(s1.contains("ee")); // false
+
+    System.out.println(System.identityHashCode(s1));
+    System.out.println(System.identityHashCode(s1));
 
     // 두 문자열을 연결하여 새 문자열을 만들자!
     String s2 = s1.concat(", world!");
+    s1 = s1.concat(", world!");
     System.out.println(s1); // 기존 인스턴스의 값은 변경하지 않는다.
     System.out.println(s2); // 새로 문자열을 만든다.
+    System.out.println(System.identityHashCode(s1));
+    System.out.println(s1 == s2);
 
     // 두 인스턴스에 들어 있는 문자열이 같은 지 비교할 때 
     System.out.println(s1.equals("aaa")); // false
@@ -61,9 +67,9 @@ public class Exam0210 {
     System.out.println(s5);
 
     // => primitive 값을 문자열로 만든다.
-    String s6 = String.valueOf(true);
-    String s7 = String.valueOf(3.14f);
-    String s8 = String.valueOf(100);
+    String s6 = String.valueOf(true); // "true"
+    String s7 = String.valueOf(3.14f); // "3.14"
+    String s8 = String.valueOf(100); // "100"
     System.out.println(s6);
     System.out.println(s7);
     System.out.println(s8);
