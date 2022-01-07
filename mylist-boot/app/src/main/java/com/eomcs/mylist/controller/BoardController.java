@@ -6,7 +6,6 @@ import java.sql.Date;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.mylist.domain.Board;
-import com.eomcs.mylist.domain.Contact;
 import com.eomcs.util.ArrayList;
 
 @RestController 
@@ -29,7 +28,7 @@ public class BoardController {
         break;
       }
       if (c == '\n') { // 만약 읽은 문자가 줄바꿈 명령이라면, 지금까지 읽은 CSV 데이터를 분석하여 Contact 객체에 담는다.
-        boardList.add(Contact.valueOf(buf.toString())); // 파일에서 읽은 CSV 데이터로 객체를 초기화시킨 후 목록에 등록한다.
+        boardList.add(Board.valueOf(buf.toString())); // 파일에서 읽은 CSV 데이터로 객체를 초기화시킨 후 목록에 등록한다.
         buf.setLength(0); // 다음 데이터를 읽기 위해 버퍼를 초기화시킨다.
       } else { // 문자를 읽을 때마다 버퍼에 임시 보관한다.        
         buf.append((char)c);
