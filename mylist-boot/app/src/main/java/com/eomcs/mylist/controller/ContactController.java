@@ -65,15 +65,13 @@ public class ContactController {
   @RequestMapping("/contact/save")
   public Object save() throws Exception {
     FileWriter out = new FileWriter("contact.csv"); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 파일이 생성된다.
+
     Object[] arr = contactList.toArray();
     for (Object obj : arr) {
       Contact contact = (Contact) obj;
-      out.write(String.format("%s,%s,%s,%s\n", 
-          contact.getName(), 
-          contact.getEmail(), 
-          contact.getTel(), 
-          contact.getCompany()));
+      out.write(contact.toCsvString() + "\n");
     }
+
     out.close();
     return 0;
   }
