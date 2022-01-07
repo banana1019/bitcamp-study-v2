@@ -1,5 +1,6 @@
 package com.eomcs.mylist.controller;
 
+import java.io.FileWriter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.mylist.domain.Todo;
@@ -62,5 +63,19 @@ public class TodoController {
 
     todoList.remove(index);  // 메서드 이름으로 코드의 의미를 짐작할 수 있다. 이것이 메서드로 분리하는 이유이다.
     return 1;
+  }
+
+  @RequestMapping("/todo/save")
+  public Object save() throws Exception {
+    FileWriter out = new FileWriter("todos.csv"); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 파일이 생성된다.
+
+    Object[] arr = todoList.toArray();
+    for (Object obj : arr) {
+      Todo todo = (Todo) obj;
+      out.write(todo.toCsvString() + "\n");
+    }
+
+    out.close();
+    return arr.length;
   }
 }

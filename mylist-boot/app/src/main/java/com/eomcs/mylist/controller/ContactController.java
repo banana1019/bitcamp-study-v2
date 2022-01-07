@@ -23,11 +23,7 @@ public class ContactController {
 
     StringBuilder buf = new StringBuilder();
     int c;
-    while (true) {
-      c = in.read(); // 파일에서 한 문자를 읽는다.
-      if (c == -1) { // 더 이상 읽을 문자가 없다면 반복문을 종료한다.
-        break;
-      }
+    while ((c = in.read()) != -1) { // 파일에서 한 문자를 읽는다. 더 이상 읽을 문자가 없으면 반복문을 종료한다.
       if (c == '\n') { // 만약 읽은 문자가 줄바꿈 명령이라면, 지금까지 읽은 CSV 데이터를 분석하여 Contact 객체에 담는다.
         contactList.add(Contact.valueOf(buf.toString())); // 파일에서 읽은 CSV 데이터로 객체를 초기화시킨 후 목록에 등록한다.
         buf.setLength(0); // 다음 데이터를 읽기 위해 버퍼를 초기화시킨다.
@@ -93,7 +89,7 @@ public class ContactController {
     }
 
     out.close();
-    return 0;
+    return arr.length;
   }
 
   int indexOf(String email) {
