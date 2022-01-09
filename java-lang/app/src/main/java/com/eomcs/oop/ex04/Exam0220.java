@@ -16,11 +16,12 @@ public class Exam0220 {
     Integer i3 = Integer.valueOf(300);
 
     // 인스턴스 메서드 사용
-    System.out.println(i2.compareTo(i1));
-    System.out.println(i2.compareTo(i3));
+    System.out.println(i2.compareTo(i1)); // 1
+    System.out.println(i2.compareTo(i3)); // -1
 
-    int v1 = i2.intValue(); // Integer 객체에서 int 값을 뽑아낼 때
-    System.out.println(v1);
+    // Integer 객체에서 int 값을 뽑아낼 때
+    int v1 = i2.intValue(); // 200
+    System.out.println(v1); // 200
 
     // 스태틱 메서드 = 클래스 메서드 사용
     int v2 = Integer.parseInt("1280"); // String ==> int 변환
@@ -33,11 +34,11 @@ public class Exam0220 {
     Integer x2 = Integer.valueOf("44", 16); // 16진수라고 지정한다.
     System.out.printf("%d, %d\n", x1, x2);
 
-    float f = Float.parseFloat("3.14f");
+    float f = Float.parseFloat("3.14f"); // String ==> float 변환
     boolean b = Boolean.parseBoolean("true");
     System.out.printf("%f, %b\n", f, b);
 
-    float f2 = Float.valueOf("3.14f");
+    float f2 = Float.valueOf("3.14f"); // Float.valueOf(float f) float 값을 가지고 Float 인스턴스를 생성할 때!
     System.out.printf("%f\n", f2);
   }
 }

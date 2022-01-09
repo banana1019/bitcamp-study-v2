@@ -7,23 +7,24 @@ public class Exam0230 {
     // 전체 메서드가 "클래스 메서드=스태틱 메서드"이다.
 
     // => 절대값 계산
-    System.out.println(Math.abs(-200));
+    System.out.println(Math.abs(-200)); // 200
 
     // => ceil() : 파라미터로 주어진 부동소수점이 바로 위 큰 정수 값을 리턴
     // => floor() : 파라미터로 주어니 부동소수점의 바로 밑 작은 정수 값을 리턴
-    System.out.println(Math.ceil(3.28)); // 4
-    System.out.println(Math.floor(3.28)); // 3
-    
-    System.out.println(Math.ceil(-3.28)); // -3
-    System.out.println(Math.floor(-3.28)); // -4
+    System.out.println(Math.ceil(3.28)); // 4.0 (double 타입)
+    System.out.println(Math.floor(3.28)); // 3.0
+
+    System.out.println(((Object)Math.ceil(3.28)).getClass().getSimpleName());
+
+    System.out.println(Math.ceil(-3.28)); // -3.0
+    System.out.println(Math.floor(-3.28)); // -4.0
 
     // => 2의 7승 값을 알고 싶을 때
-    System.out.println(Math.pow(2, 7));
+    System.out.println(Math.pow(2, 7)); // 128.0
 
     // => 반올림하여 정수 값 리턴
-    System.out.println(Math.round(3.14));
-    System.out.println(Math.round(3.54));
-
+    System.out.println(Math.round(3.14)); // 3
+    System.out.println(Math.round(3.54)); // 4
 
   }
 }
