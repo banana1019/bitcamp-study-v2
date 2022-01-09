@@ -37,9 +37,9 @@
   var tbody = document.querySelector("#x-todo-table tbody")
 
   document.querySelector("#x-todo-input").onkeyup = function(e) {
-    if (e.keyCode == 27) {
+    if (e.keyCode == 27) {  // ESC 키를 눌러 편집을 취소한다면
       e.target.value = "";
-    } else if (e.keyCode == 13) {
+    } else if (e.keyCode == 13) {  // Enter 키를 눌렀다면
       if (e.target.value == "") {
         window.alert("필수 입력 항목이 비어 있습니다.");
         return;
