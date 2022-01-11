@@ -11,7 +11,7 @@ public class Exam01 {
     obj.v2 = 200; // B 클래스 설계도에 따라 만든 변수
     obj.v1 = 100; // A 클래스 설계도에 따라 만든 변수
 
-    System.out.printf("v2=%d, v1=%d\n", obj.v2, obj.v1);
+    System.out.printf("obj.v2=%d, obj.v1=%d\n", obj.v2, obj.v1);
     System.out.println("---------------------------------");
 
     // 클래스는 오직 한 번만 로딩된다.
@@ -20,7 +20,7 @@ public class Exam01 {
     B obj2 = new B();
     obj2.v2 = 2000;
     obj2.v1 = 1000;
-    System.out.printf("v2=%d, v1=%d\n", obj2.v2, obj2.v1);
+    System.out.printf("obj2.v2=%d, obj2.v1=%d\n", obj2.v2, obj2.v1);
 
     // B 클래스의 인스턴스 생성 과정
     // 1) B의 수퍼 클래스가 로딩되어 있지 않다면, 수퍼 클래스(A 클래스)를 먼저 로딩한다.
