@@ -1,9 +1,9 @@
 package com.eomcs.mylist.controller;
 
 import java.io.FileReader;
-import java.io.FileWriter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.eomcs.io.FileWriter2;
 import com.eomcs.mylist.domain.Book;
 import com.eomcs.util.ArrayList;
 
@@ -70,12 +70,12 @@ public class BookController {
 
   @RequestMapping("/book/save")
   public Object save() throws Exception {
-    FileWriter out = new FileWriter("books.csv"); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 파일이 생성된다.
+    FileWriter2 out = new FileWriter2("books.csv"); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 파일이 생성된다.
 
     Object[] arr = bookList.toArray();
     for (Object obj : arr) {
       Book book = (Book) obj;
-      out.write(book.toCsvString() + "\n");
+      out.println(book.toCsvString());
     }
 
     out.close();
