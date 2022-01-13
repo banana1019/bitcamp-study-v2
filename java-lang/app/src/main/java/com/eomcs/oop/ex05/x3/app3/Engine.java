@@ -24,6 +24,7 @@ public class Engine {
 
   // 트레일러 붙이는 기능 추가
   CampingTrailer trailer;
+
   public void setTrailer(CampingTrailer trailer) {
     this.trailer = trailer;
   }

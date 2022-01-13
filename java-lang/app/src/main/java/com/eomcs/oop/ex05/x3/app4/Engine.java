@@ -24,6 +24,7 @@ public class Engine {
 
   // 하이브리드 자동차 기능 추가
   int kwh;
+
   public void chargeBattery(int kwh) {
     this.kwh = kwh;
   }

@@ -7,6 +7,8 @@ public class CarTest1 {
     sedan.run();
     sedan.stop();
 
+    System.out.println("----------------------------");
+
     Truck truck = new Truck();
     truck.start();
     truck.run();

@@ -1,6 +1,6 @@
 package com.eomcs.oop.ex05.x1.upgrade5;
 
-// 5) 계산기 기능 확장: 방법5 - 의존 객체 주입 방식을 적용하여 기능 확장
+// 5) 계산기 기능 확장 방법5 - 의존 객체 주입 방식을 적용하여 기능 확장
 // - 곱하기 계산 기능 추가
 // - 기존의 Calculator 객체를 포함한 후 새 기능 추가하기
 public class CalculatorTest {

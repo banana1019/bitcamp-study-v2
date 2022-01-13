@@ -1,6 +1,6 @@
 package com.eomcs.oop.ex05.x1.upgrade3;
 
-// 3) 계산기 기능 확장: 방법3 - 상속 문법을 활용
+// 3) 계산기 기능 확장 방법3 - 상속 문법을 활용
 //   - 곱하기 계산 기능 추가
 //   - 상속 문법을 이용하여 기존의 Calculator 클래스와 연결한 후 새 기능을 추가한다.
 public class CalculatorTest {

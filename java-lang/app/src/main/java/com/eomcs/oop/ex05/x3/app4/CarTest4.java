@@ -13,7 +13,7 @@ public class CarTest4 {
     // => run() 메서드 변경
 
     Engine car = new Engine();
-    //    car.chargeBattery(100);
+    car.chargeBattery(100);
     car.start();
     car.run();
     car.stop();

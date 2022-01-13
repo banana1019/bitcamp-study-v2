@@ -1,6 +1,6 @@
 package com.eomcs.oop.ex05.x1.upgrade2;
 
-// 2) 계산기 기능 확장: 방법2 - 기존 코드 복제 후 변경하기
+// 2) 계산기 기능 확장 방법2 - 기존 코드 복제 후 변경하기
 //   - 곱하기 계산 기능 추가
 //   - 기존의 Calculator 클래스를 복제한 후 기능을 추가한다.
 public class CalculatorTest {

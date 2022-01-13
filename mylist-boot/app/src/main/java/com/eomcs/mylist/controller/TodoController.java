@@ -18,7 +18,6 @@ public class TodoController {
   ArrayList todoList = new ArrayList();
 
   public TodoController() throws Exception {
-    todoList = new ArrayList();
     System.out.println("TodoController() 호출됨!");
 
     BufferedReader in = new BufferedReader(new FileReader("todos.csv"));

@@ -17,7 +17,7 @@ public class BookController {
   public BookController() throws Exception {
     System.out.println("BookController() 호출됨!");
 
-    BufferedReader in = new BufferedReader(new FileReader("books.csv")); // 데코레이터 객체
+    BufferedReader in = new BufferedReader(new FileReader("books.csv")); // 주 객체에 데코레이터 객체를 연결
 
     String line;
     while ((line = in.readLine()) != null) { // readLine()이 null을 리턴한다면 더 이상 읽을 데이터가 없다는 뜻!

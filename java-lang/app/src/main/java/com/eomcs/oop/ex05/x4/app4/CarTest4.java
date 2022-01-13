@@ -13,7 +13,7 @@ public class CarTest4 {
     // => run() 메서드 오버라이딩
 
     HybridCar car = new HybridCar();
-    //    car.chargeBattery(100);
+    car.chargeBattery(100);
     car.start();
     car.run();
     car.stop();

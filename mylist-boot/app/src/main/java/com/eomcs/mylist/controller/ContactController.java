@@ -24,7 +24,7 @@ public class ContactController {
     BufferedReader in = new BufferedReader(new FileReader("contacts.csv"));
 
     String line;
-    while ((line = in.readLine()) != null) { // readLine()이 null을 리턴한다면 더 이상 읽을 데이터가 없다는 뜻!
+    while ((line = in.readLine()) != null) { // readLine()이 null을 리턴한다면 파일을 다 읽었다는 것이다.
       contactList.add(Contact.valueOf(line)); // 파일에서 읽은 한 줄의 CSV 데이터로 객체를 만든 후 목록에 등록한다.
     } 
 

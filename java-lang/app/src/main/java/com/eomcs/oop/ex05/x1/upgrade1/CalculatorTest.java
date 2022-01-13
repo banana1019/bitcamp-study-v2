@@ -1,6 +1,6 @@
 package com.eomcs.oop.ex05.x1.upgrade1;
 
-// 1) 계산기 기능 확장: 방법1 - 기존 코드 변경하기
+// 1) 계산기 기능 확장 방법1 - 기존 코드 변경하기
 //   - 곱하기 계산 기능 추가
 //   - 기존 Calculator 클래스에 multiple() 메서드 추가
 public class CalculatorTest {

@@ -4,9 +4,9 @@ import com.eomcs.oop.ex05.x4.app2.Truck;
 import com.eomcs.oop.ex05.x4.app3.CampingTrailer;
 
 public class TrailerTruck extends Truck {
+  // 트레일러 붙이는 기능 추가
   CampingTrailer trailer;
 
-  // 트레일러 붙이는 기능 추가
   public void setTrailer(CampingTrailer trailer) {
     this.trailer = trailer;
   }
