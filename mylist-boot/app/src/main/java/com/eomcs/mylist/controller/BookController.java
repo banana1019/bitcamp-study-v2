@@ -1,9 +1,11 @@
 package com.eomcs.mylist.controller;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.eomcs.io.FileWriter2;
 import com.eomcs.mylist.domain.Book;
 import com.eomcs.util.ArrayList;
 
@@ -13,20 +15,13 @@ public class BookController {
   ArrayList bookList = new ArrayList();
 
   public BookController() throws Exception {
-    bookList = new ArrayList();
     System.out.println("BookController() 호출됨!");
 
-    FileReader in = new FileReader("books.csv");
+    BufferedReader in = new BufferedReader(new FileReader("books.csv")); // 데코레이터 객체
 
-    StringBuilder buf = new StringBuilder();
-    int c;
-    while ((c = in.read()) != -1) { // 파일에서 한 문자를 읽는다. 더 이상 읽을 문자가 없으면 반복문을 종료한다.
-      if (c == '\n') { // 만약 읽은 문자가 줄바꿈 명령이라면, 지금까지 읽은 CSV 데이터를 분석하여 Contact 객체에 담는다.
-        bookList.add(Book.valueOf(buf.toString())); // 파일에서 읽은 CSV 데이터로 객체를 초기화시킨 후 목록에 등록한다.
-        buf.setLength(0); // 다음 데이터를 읽기 위해 버퍼를 초기화시킨다.
-      } else { // 문자를 읽을 때마다 버퍼에 임시 보관한다.        
-        buf.append((char)c);
-      }
+    String line;
+    while ((line = in.readLine()) != null) { // readLine()이 null을 리턴한다면 더 이상 읽을 데이터가 없다는 뜻!
+      bookList.add(Book.valueOf(line)); // 파일에서 읽은 한 줄의 CSV 데이터로 객체를 만든 후 목록에 등록한다.
     }
 
     in.close();
@@ -70,7 +65,7 @@ public class BookController {
 
   @RequestMapping("/book/save")
   public Object save() throws Exception {
-    FileWriter2 out = new FileWriter2("books.csv"); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 파일이 생성된다.
+    PrintWriter out = new PrintWriter(new FileWriter("books.csv")); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 파일이 생성된다.
 
     Object[] arr = bookList.toArray();
     for (Object obj : arr) {
