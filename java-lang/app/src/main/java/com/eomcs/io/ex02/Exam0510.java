@@ -24,7 +24,7 @@ public class Exam0510 {
     //    getBytes()가 리턴하는 바이트 배열은
     //    OS의 기본 인코딩으로 변환될 것이다.
     // => OS 기본 인코딩 
-    //      Windows => MS949
+    //      Windows => MS949(CP949)
     //      Linux/macOS => UTF-8
     // => OS에 상관없이 동일한 실행 결과를 얻고 싶다면, 다음과 같이 file.encoding 옵션을 붙여라
     //      $ java -Dfile.encoding=UTF-8 -cp bin/main .....
@@ -33,7 +33,7 @@ public class Exam0510 {
     //
     // JVM에 문자를 입출력할 때 사용하는 기본 문자 집합이 무엇인지 알아 본다.
     System.out.printf("file.encoding=%s\n", System.getProperty("file.encoding"));
-    byte[] bytes = str.getBytes();
+    byte[] bytes = str.getBytes(); // 문자집합을 지정하지 않으면 file.encoding에 설정된 문자집합으로 인코딩하여 리턴한다.
     //
     // 이클립스: 
     //      UCS2 ==> UTF-8

@@ -18,6 +18,9 @@ public class Exam0522 {
     in.close();
 
     String str = new String(buf, 0, count);
+    // 바이트 배열에 MS949 문자집합에 따라 인코딩된 데이터가 들어 있는데,
+    // String 클래스는 UTF-8 문자집합으로 인코딩되었다고 가정하기 때문에
+    // 제대로 읽어서 UTF-16으로 변환할 수 없는 것이다.
     System.out.println(str);
 
     // ms949.txt 파일을 읽을 때 문자가 깨지는 이유?

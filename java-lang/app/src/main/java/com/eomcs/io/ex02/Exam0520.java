@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 public class Exam0520 {
 
   public static void main(String[] args) throws Exception {
-    StringBuffer strbuf = new StringBuffer();
 
     FileInputStream in = new FileInputStream("sample/ms949.txt");
 
@@ -26,7 +25,6 @@ public class Exam0520 {
 
     in.close();
 
-    System.out.println(strbuf.toString());
   }
 
 }
