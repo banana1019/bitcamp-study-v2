@@ -5,7 +5,7 @@ public class CarTest2 {
     Sedan sedan = new Sedan();
     Trailer trailer = new Trailer(sedan);
     trailer.start();
-    trailer.run();
+    trailer.run(); // Sedan의 run() 호출
     trailer.stop();
 
     System.out.println("----------------------------");
