@@ -10,9 +10,9 @@ public class DataFileOutputStream extends FileOutputStream {
 
   public void writeUTF(String str) throws Exception {
     // 상속 받은 write() 메서드를 사용하여 문자열 출력
-    byte[] bytes = str.getBytes("UTF-8");
-    this.write(bytes.length);
-    this.write(bytes);
+    byte[] bytes = str.getBytes("UTF-8"); // 문자열을 바이트 배열로 인코딩
+    this.write(bytes.length); // 바이트 배열 길이 출력
+    this.write(bytes); // 바이트 배열 출력
   }
 
   public void writeInt(int value) throws Exception {

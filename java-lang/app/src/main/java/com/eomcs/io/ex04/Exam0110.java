@@ -10,7 +10,7 @@ public class Exam0110 {
 
     int money = 1_3456_7890; // = 0x080557d2
 
-    out.write(money); //항상 출력할 때는 맨 끝 1바이트만 출력한다.
+    out.write(money); // 항상 출력할 때는 맨 끝 1바이트만 출력한다.
 
     out.close();
 
