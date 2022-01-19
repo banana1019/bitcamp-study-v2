@@ -2,10 +2,10 @@ package com.eomcs.mylist.controller;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.mylist.domain.Contact;
@@ -23,21 +23,19 @@ public class ContactController {
     contactList = new ArrayList();
     System.out.println("ContactController() 호출됨!");
 
-    DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream("contacts.data")));
+    ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("contacts.ser2")));
 
-    while (true) {
-      try {
-        Contact contact = new Contact();
-        contact.setName(in.readUTF());
-        contact.setEmail(in.readUTF());
-        contact.setTel(in.readUTF());
-        contact.setCompany(in.readUTF());
+    //    while (true) {
+    //      try {
+    //        Contact contact = (Contact) in.readObject();
+    //
+    //        contactList.add(contact);
+    //      } catch (Exception e) {
+    //        break;
+    //      }
+    //    } 
 
-        contactList.add(contact);
-      } catch (Exception e) {
-        break;
-      }
-    } 
+    contactList = (ArrayList) in.readObject();
 
     in.close();
   }
@@ -87,19 +85,16 @@ public class ContactController {
 
   @RequestMapping("/contact/save")
   public Object save() throws Exception {
-    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("contacts.data"))); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 파일이 생성된다.
+    ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("contacts.ser2")));
 
-    Object[] arr = contactList.toArray();
-    for (Object obj : arr) {
-      Contact contact = (Contact) obj;
-      out.writeUTF(contact.getName());
-      out.writeUTF(contact.getEmail());
-      out.writeUTF(contact.getTel());
-      out.writeUTF(contact.getCompany());
-    }
+    //    Object[] arr = contactList.toArray();
+    //    for (Object obj : arr) {
+    //      out.writeObject(obj);
+    //    }
 
+    out.writeObject(contactList);
     out.close();
-    return arr.length;
+    return contactList.size();
   }
 
   int indexOf(String email) {

@@ -2,11 +2,10 @@ package com.eomcs.mylist.controller;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.sql.Date;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.mylist.domain.Book;
@@ -20,27 +19,19 @@ public class BookController {
   public BookController() throws Exception {
     System.out.println("BookController() 호출됨!");
 
-    DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream("books.data"))); // 주 객체에 데코레이터 객체를 연결
+    ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("books.ser2"))); // 주 객체에 데코레이터 객체를 연결
 
-    while (true) {
-      try {
-        Book book = new Book();
-        book.setTitle(in.readUTF());
-        book.setAuthor(in.readUTF());
-        book.setPress(in.readUTF());
-        book.setPage(in.readInt());
-        book.setPrice(in.readInt());
-        String date = in.readUTF();
-        if (date.length() > 0) {
-          book.setReadDate(Date.valueOf(date));
-        }
-        book.setFeed(in.readUTF());
+    //    while (true) {
+    //      try {
+    //        Book book = (Book) in.readObject();
+    //
+    //        bookList.add(book);
+    //      } catch (Exception e) {
+    //        break;
+    //      }
+    //    }
 
-        bookList.add(book);
-      } catch (Exception e) {
-        break;
-      }
-    }
+    bookList = (ArrayList) in.readObject();
 
     in.close();
   }
@@ -83,26 +74,16 @@ public class BookController {
 
   @RequestMapping("/book/save")
   public Object save() throws Exception {
-    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("books.data"))); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 파일이 생성된다.
+    ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("books.ser2"))); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 파일이 생성된다.
 
-    Object[] arr = bookList.toArray();
-    for (Object obj : arr) {
-      Book book = (Book) obj;
-      out.writeUTF(book.getTitle());
-      out.writeUTF(book.getAuthor());
-      out.writeUTF(book.getPress());
-      out.writeInt(book.getPage());
-      out.writeInt(book.getPrice());
-      if (book.getReadDate() == null) {
-        out.writeUTF("");
-      } else {
-        out.writeUTF(book.getReadDate().toString());
-      }
-      out.writeUTF(book.getFeed());
-    }
+    //    Object[] arr = bookList.toArray();
+    //    for (Object obj : arr) {
+    //      out.writeObject(obj);
+    //    }
 
+    out.writeObject(bookList);
     out.close();
-    return arr.length;
+    return bookList.size();
   }
 }
 
