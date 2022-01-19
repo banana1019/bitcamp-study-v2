@@ -1,9 +1,11 @@
 package com.eomcs.mylist.controller;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.sql.Date;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,18 +21,23 @@ public class BoardController {
   public BoardController() throws Exception {
     System.out.println("BoardController() 호출됨!");
 
-    // 1) 주 작업 객체(concrete component) 준비 
-    FileReader in = new FileReader("boards.csv");
+    DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream("boards.data"))); // 데코레이터
 
-    // 2) 한 줄 단위로 데이터를 읽는 작업을 수행하는 데코레이터 준비
-    BufferedReader in2 = new BufferedReader(in);
+    while (true) {
+      try {        
+        Board board = new Board();
+        board.setTitle(in.readUTF());
+        board.setContent(in.readUTF());
+        board.setViewCount(in.readInt());
+        board.setCreatedDate(Date.valueOf(in.readUTF()));
 
-    String line;
-    while ((line = in2.readLine()) != null) { // 한 줄의 문자열을 읽었으면
-      boardList.add(Board.valueOf(line)); // 파일에서 읽은 한 줄의 CSV 데이터로 객체를 만든 후 목록에 등록한다.
+        boardList.add(board); // 파일에서 읽은 한 줄의 CSV 데이터로 객체를 만든 후 목록에 등록한다.
+      } catch (Exception e) {
+        break;
+      }
     }
 
-    in2.close();
+    in.close();
     // in.close(); // 데코레이터를 close() 하면 그 데코레이터와 연결된 객체들도 모두 close() 된다.
   }
 
@@ -79,20 +86,19 @@ public class BoardController {
 
   @RequestMapping("/board/save")
   public Object save() throws Exception {
-    // 1) 주 작업 객체 준비
-    FileWriter out = new FileWriter("boards.csv"); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 파일이 생성된다.
-
-    // 2) 한 줄 단위로 출력하는 데코레이터 객체 준비
-    PrintWriter out2 = new PrintWriter(out);
+    // 1) 바이트 스트림 객체 준비
+    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("boards.data")));
 
     Object[] arr = boardList.toArray();
     for (Object obj : arr) {
       Board board = (Board) obj;
-      out2.println(board.toCsvString());
+      out.writeUTF(board.getTitle());
+      out.writeUTF(board.getContent());
+      out.writeInt(board.getViewCount());
+      out.writeUTF(board.getCreatedDate().toString());
     }
 
-    out.close();
-    // out.close(); // 데코레이터에서 close()하면 그 데코레이터와 연결된 모든 객체도 자동으로 close() 한다.
+    out.close(); // 데코레이터에서 close()하면 그 데코레이터와 연결된 모든 객체도 자동으로 close() 한다.
     return arr.length;
   }
 }
