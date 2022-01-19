@@ -19,21 +19,25 @@ public class BookController {
   public BookController() throws Exception {
     System.out.println("BookController() 호출됨!");
 
-    ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("books.ser2"))); // 주 객체에 데코레이터 객체를 연결
+    try {      
+      ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("books.ser2"))); // 주 객체에 데코레이터 객체를 연결
 
-    //    while (true) {
-    //      try {
-    //        Book book = (Book) in.readObject();
-    //
-    //        bookList.add(book);
-    //      } catch (Exception e) {
-    //        break;
-    //      }
-    //    }
+      //    while (true) {
+      //      try {
+      //        Book book = (Book) in.readObject();
+      //
+      //        bookList.add(book);
+      //      } catch (Exception e) {
+      //        break;
+      //      }
+      //    }
 
-    bookList = (ArrayList) in.readObject();
+      bookList = (ArrayList) in.readObject();
 
-    in.close();
+      in.close();
+    } catch (Exception e) {
+      System.out.println("독서록 데이터를 로딩하는 중 오류 발생!");
+    }
   }
 
   @RequestMapping("/book/list")
@@ -74,7 +78,7 @@ public class BookController {
 
   @RequestMapping("/book/save")
   public Object save() throws Exception {
-    ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("books.ser2"))); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 파일이 생성된다.
+    ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("books.ser2")));
 
     //    Object[] arr = bookList.toArray();
     //    for (Object obj : arr) {

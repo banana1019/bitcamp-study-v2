@@ -23,21 +23,26 @@ public class ContactController {
     contactList = new ArrayList();
     System.out.println("ContactController() 호출됨!");
 
-    ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("contacts.ser2")));
+    try {
+      ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("contacts.ser2")));
 
-    //    while (true) {
-    //      try {
-    //        Contact contact = (Contact) in.readObject();
-    //
-    //        contactList.add(contact);
-    //      } catch (Exception e) {
-    //        break;
-    //      }
-    //    } 
+      //    while (true) {
+      //      try {
+      //        Contact contact = (Contact) in.readObject();
+      //
+      //        contactList.add(contact);
+      //      } catch (Exception e) {
+      //        break;
+      //      }
+      //    } 
 
-    contactList = (ArrayList) in.readObject();
+      contactList = (ArrayList) in.readObject();
 
-    in.close();
+      in.close();
+    } catch (Exception e) {
+      System.out.println("연락처 데이터를 로딩하는 중에 오류 발생!");
+    }
+
   }
 
   @RequestMapping("/contact/list")

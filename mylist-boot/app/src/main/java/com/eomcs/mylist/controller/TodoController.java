@@ -22,20 +22,24 @@ public class TodoController {
   public TodoController() throws Exception {
     System.out.println("TodoController() 호출됨!");
 
-    ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("todos.ser2")));
+    try {
+      ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("todos.ser2")));
 
-    //    while (true) {
-    //      try {
-    //        Todo todo = (Todo) in.readObject();
-    //        todoList.add(todo);
-    //      } catch (Exception e) {
-    //        break;
-    //      }
-    //    }
+      //    while (true) {
+      //      try {
+      //        Todo todo = (Todo) in.readObject();
+      //        todoList.add(todo);
+      //      } catch (Exception e) {
+      //        break;
+      //      }
+      //    }
 
-    todoList = (ArrayList) in.readObject();
+      todoList = (ArrayList) in.readObject();
 
-    in.close();
+      in.close();
+    } catch (Exception e) {
+      System.out.println("todo 데이터를 로딩하는 중에 오류 발생!");
+    }
   }
 
   @RequestMapping("/todo/list") // 클라이언트 요청을 다루는 역할

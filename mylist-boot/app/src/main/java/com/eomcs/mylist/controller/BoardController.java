@@ -19,9 +19,9 @@ public class BoardController {
   ArrayList boardList = new ArrayList();
 
   public BoardController() throws Exception {
-    try {
-      System.out.println("BoardController() 호출됨!");
+    System.out.println("BoardController() 호출됨!");
 
+    try {
       ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("boards.ser2"))); // 데코레이터
 
       // 1) 객체가 각각 따로 serialize 되었을 경우, 다음과 같이 객체 단위로 읽으면 되고,
