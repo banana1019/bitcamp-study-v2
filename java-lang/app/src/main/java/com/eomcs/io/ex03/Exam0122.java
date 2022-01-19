@@ -17,7 +17,7 @@ public class Exam0122 {
     System.out.printf("file.encoding=%s\n", System.getProperty("file.encoding"));
 
     // file.encoding이 UTF-8로 되어 있다면,
-    // => 영어는 1바이를 읽어서 2바이트 UCS2로 변환한다.
+    // => 영어는 1바이트를 읽어서 2바이트 UCS2로 변환한다.
     // => MS949도 영어인 경우 UTF-8과 같기 때문에 변환하는데 문제가 없다.
     int ch1 = in.read(); // 41 => 0041('A')
     int ch2 = in.read(); // 42 => 0042('B')

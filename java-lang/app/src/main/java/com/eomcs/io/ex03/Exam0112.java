@@ -8,7 +8,7 @@ public class Exam0112 {
   public static void main(String[] args) throws Exception {
 
 
-    // 1) 출력 스트림 객체를 생성할 때  문자 집합을 지정하면 
+    // 1) 출력 스트림 객체를 생성할 때 문자 집합을 지정하면 
     //    UCS2 문자열을 해당 문자집합으로 인코딩 한다.
     Charset charset = Charset.forName("UTF-16BE");
     FileWriter out = new FileWriter("temp/test2.txt", charset);
