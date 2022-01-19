@@ -11,6 +11,7 @@ public class Exam0420 {
     byte[] buf = new byte[100];
 
     int count = in.read(buf);
+    System.out.printf("읽은 바이트 수: %d\n", count);
 
     // Exam0410의 실행 결과로 만들어진 파일을 읽어라!
     // 바이트 배열에 들어있는 값을 사용하여 String 인스턴스를 만든다.

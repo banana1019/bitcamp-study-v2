@@ -24,7 +24,7 @@ public class Exam0320 {
 
     in.close();
 
-    System.out.printf("%016x\n", value);
+    System.out.printf("%016x(%1$d)\n", value);
   }
 }
 
