@@ -14,7 +14,7 @@ public class Score implements Serializable {
 
   // => sum, aver 는 위의 변수를 계산해서 그 결과를 저장하는 변수이다.
   // 이렇게 다른 인스턴스 변수의 값을 가지고 계산한 결과를 저장하는 변수인 경우
-  // sirialize 대상에서 제외해야 한다.
+  // serialize 대상에서 제외해야 한다.
   // 왜? 
   // - 값의 왜곡을 막기 위함이다.
   //

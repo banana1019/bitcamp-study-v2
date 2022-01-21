@@ -34,9 +34,9 @@ public class Exam0132 {
     String s1 = new String("Hello");
     String s2 = new String("Hello");
 
-    System.out.println(s1 == s2);
+    System.out.println(s1 == s2); // false
 
-    System.out.println(s1.equals(s2));
+    System.out.println(s1.equals(s2)); // true
     // 위의 실행 결과를 보면 s1과 s2가 서로 다른 인스턴스인데도 불구하고
     // true를 리턴한다.
     // 이유?
@@ -49,7 +49,7 @@ public class Exam0132 {
     // Member 객체에 대해서도 인스턴스가 다르더라도
     // 데이터가 같으면 true를 리턴하도록 하고 싶은가?
     // => String 클래스처럼 equals()을 오버라이딩 하라!
-    // => Exam0333.java를 보라!
+    // => Exam0133.java를 보라!
 
   }
 }
