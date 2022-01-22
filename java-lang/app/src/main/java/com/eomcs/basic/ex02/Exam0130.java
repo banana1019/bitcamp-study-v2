@@ -12,7 +12,7 @@ public class Exam0130 {
 
     System.out.println(s1.hashCode() == s2.hashCode()); // true
     //
-    // 그러나, String의 hashCode()은
+    // 그러나, String의 hashCode()는
     // 문자열이 같으면 같은 hashCode()를 리턴하도록 오버라이딩 하였다.
     // 이유?
     // - 문자열이 같은 경우 같은 객체로 다루기 위함이다.
