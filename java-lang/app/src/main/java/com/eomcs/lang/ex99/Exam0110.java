@@ -26,7 +26,7 @@ public class Exam0110 {
     // 이스케이프 문자를 통해 줄바꿈을 수행한다.
     System.out.print('\n');
 
-    System.out.print("OK!\n"); // ==> println("Ok!")
+    System.out.print("OK!\n"); // ==> println("OK!")
     System.out.print("Hi!\n"); // ==> println("Hi!");
 
   }
