@@ -8,12 +8,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.sql.Date;
 import com.eomcs.mylist.domain.Board;
-import com.eomcs.util.ArrayList;
 
-public class BinaryBoardDao {
+// 인터페이스를 직접 구현하는 대신에 AbstractBoardDao를 상속받는다.
+//
+public class BinaryBoardDao extends AbstractBoardDao {
 
   String filename = "boards.bin";
-  ArrayList boardList = new ArrayList(); // 변수 선언 = 변수를 만들라는 명령!
 
   public BinaryBoardDao() {
     try {
@@ -39,7 +39,8 @@ public class BinaryBoardDao {
     }
   }
 
-  private void save() throws Exception {
+  @Override
+  protected void save() throws Exception {
     DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(filename)));
 
     // 게시글 개수를 먼저 출력한다.
@@ -59,47 +60,4 @@ public class BinaryBoardDao {
     out.close();
   }
 
-  public int countAll() {
-    return boardList.size();
-  }
-
-  public Object[] findAll() {
-    return boardList.toArray();
-  }
-
-  public void insert(Board board) throws Exception {
-    boardList.add(board);
-    save();
-  }
-
-  public Board findByNo(int no) {
-    if (no < 0 || no >= boardList.size()) {
-      return null;
-    }
-    return (Board) boardList.get(no);
-  }
-
-  public int update(int no, Board board) throws Exception {
-    if (no < 0 || no >= boardList.size()) {
-      return 0;
-    }
-    boardList.set(no, board);
-    save();
-    return 1;
-  }
-
-  public int delete(int no) throws Exception {
-    if (no < 0 || no >= boardList.size()) {
-      return 0;
-    }
-    boardList.remove(no);
-    save();
-    return 1;
-  }
-
-  public void increaseViewCount(int no) throws Exception {
-    Board board = findByNo(no);
-    board.setViewCount(board.getViewCount() + 1);
-    save();
-  }
 }
