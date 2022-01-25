@@ -42,7 +42,7 @@ public class TodoController {
 
   @RequestMapping("/todo/check")
   public Object check(int index, boolean done) throws Exception {
-    return todoDao.check(index, done);
+    return todoDao.updateDone(index, done);
   }
 
 

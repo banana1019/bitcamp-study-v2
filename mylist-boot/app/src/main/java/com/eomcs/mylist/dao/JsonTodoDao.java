@@ -19,7 +19,7 @@ public class JsonTodoDao extends AbstractTodoDao {
       ObjectMapper mapper = new ObjectMapper();
       todoList.addAll(mapper.readValue(new File(filename), Todo[].class));
     } catch (Exception e) {
-      System.out.println("독서록 데이터 로딩 중 오류 발생!");
+      System.out.println("해야 할 일 데이터 로딩 중 오류 발생!");
     }
   }
 

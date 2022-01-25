@@ -20,6 +20,6 @@ public interface TodoDao {
 
   int delete(int no) throws Exception;
 
-  Object check(int index, boolean done) throws Exception;
+  int updateDone(int no, boolean done) throws Exception;
 
 }
