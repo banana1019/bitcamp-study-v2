@@ -1,24 +1,36 @@
 package com.eomcs.mylist.dao;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.sql.Date;
 import com.eomcs.mylist.domain.Board;
 import com.eomcs.util.ArrayList;
 
-public class CsvBoardDao {
-  // variables initializer
+public class BinaryBoardDao {
+
+  String filename = "boards.bin";
   ArrayList boardList = new ArrayList(); // 변수 선언 = 변수를 만들라는 명령!
 
-  public CsvBoardDao() {
+  public BinaryBoardDao() {
     try {
-      BufferedReader in = new BufferedReader(new FileReader("boards.csv"));
+      DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(filename)));
 
-      String csvStr;
-      while ((csvStr = in.readLine()) != null) {
-        this.boardList.add(Board.valueOf(csvStr)); 
+      // 저장된 데이터 개수를 읽어 온다.
+      int len = in.readInt();
+
+      // 게시글 개수만큼 읽는다.
+      for (int i = 0; i < len; i++) {
+        Board board = new Board();
+        board.setTitle(in.readUTF());
+        board.setContent(in.readUTF());
+        board.setViewCount(in.readInt());
+        board.setCreatedDate(Date.valueOf(in.readUTF()));
+
+        boardList.add(board);
       }
 
       in.close();
@@ -28,11 +40,18 @@ public class CsvBoardDao {
   }
 
   private void save() throws Exception {
-    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("boards.csv")));
+    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(filename)));
 
+    // 게시글 개수를 먼저 출력한다.
+    out.writeInt(boardList.size());
+
+    // 게시글을 순차적으로 출력한다.
     for (int i = 0; i < boardList.size(); i++) {
       Board board = (Board) boardList.get(i);
-      out.println(board.toCsvString());
+      out.writeUTF(board.getTitle());
+      out.writeUTF(board.getContent());
+      out.writeInt(board.getViewCount());
+      out.writeUTF(board.getCreatedDate().toString());
     }
 
     out.flush();
