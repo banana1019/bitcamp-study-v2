@@ -5,10 +5,9 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import org.springframework.stereotype.Repository;
 import com.eomcs.mylist.domain.Board;
 
-@Repository
+//@Repository
 public class CsvBoardDao extends AbstractBoardDao {
 
   public CsvBoardDao() {
@@ -17,7 +16,7 @@ public class CsvBoardDao extends AbstractBoardDao {
 
       String csvStr;
       while ((csvStr = in.readLine()) != null) {
-        this.boardList.add(Board.valueOf(csvStr)); 
+        boardList.add(Board.valueOf(csvStr)); 
       }
 
       in.close();
