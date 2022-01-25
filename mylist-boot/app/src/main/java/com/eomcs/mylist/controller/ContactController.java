@@ -25,44 +25,21 @@ public class ContactController {
 
   @RequestMapping("/contact/get")
   public Object get(String email) throws Exception {
-    int index = contactDao.indexOf(email);
-    if (index == -1) {
+    Contact contact = contactDao.findByEmail(email);
+    if (contact == null) {
       return "";
     }
-    return contactDao.findByNo(index);
+    return contact;
   }
 
   @RequestMapping("/contact/update")
   public Object update(Contact contact) throws Exception {
-    int index = contactDao.indexOf(contact.getEmail());
-    if (index == -1) {
-      return 0;
-    }
-
-    return contactDao.update(index, contact);
+    return contactDao.update(contact);
   }
-
-  /*
-  @RequestMapping("/contact/delete")
-  public Object delete(String email) {
-    Contact contact = contactDao.indexOf(email);
-    if (contact == null) {
-      return 0;
-    }
-
-    contactDao.delete(index);
-    return 1;
-  }
-   */
 
   @RequestMapping("/contact/delete")
   public Object delete(String email) throws Exception {
-    int index = contactDao.indexOf(email);
-    if (index == -1) {
-      return 0;
-    }
-
-    return contactDao.delete(index);
+    return contactDao.delete(email);
   }
 
 }

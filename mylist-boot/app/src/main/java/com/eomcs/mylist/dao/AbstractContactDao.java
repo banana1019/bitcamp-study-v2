@@ -47,7 +47,8 @@ public abstract class AbstractContactDao implements ContactDao {
   }
 
   @Override
-  public Contact findByNo(int no) {
+  public Contact findByEmail(String email) {
+    int no = indexOf(email);
     if (no < 0 || no >= contactList.size()) {
       return null;
     }
@@ -55,7 +56,8 @@ public abstract class AbstractContactDao implements ContactDao {
   }
 
   @Override
-  public int update(int no, Contact contact) throws Exception {
+  public int update(Contact contact) throws Exception {
+    int no = indexOf(contact.getEmail());
     if (no < 0 || no >= contactList.size()) {
       return 0;
     }
@@ -65,7 +67,8 @@ public abstract class AbstractContactDao implements ContactDao {
   }
 
   @Override
-  public int delete(int no) throws Exception {
+  public int delete(String email) throws Exception {
+    int no = indexOf(email);
     if (no < 0 || no >= contactList.size()) {
       return 0;
     }
@@ -73,19 +76,6 @@ public abstract class AbstractContactDao implements ContactDao {
     save();
     return 1;
   }
-
-  /*
-  @Override
-  public Contact indexOf(String email) {
-    for (int i = 0; i < contactList.size(); i++) {
-      Contact contact =  (Contact) contactList.get(i);
-      if (contact.getEmail().equals(email)) { 
-        return findByNo(i);
-      }
-    }
-    return null;
-  }
-   */
 
   @Override
   public int indexOf(String email) {

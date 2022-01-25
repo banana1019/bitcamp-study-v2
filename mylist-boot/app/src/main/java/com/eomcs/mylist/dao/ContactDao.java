@@ -14,13 +14,11 @@ public interface ContactDao {
 
   void insert(Contact contact) throws Exception;
 
-  Contact findByNo(int no);
+  Contact findByEmail(String email);
 
-  int update(int no, Contact contact) throws Exception;
+  int update(Contact contact) throws Exception;
 
-  int delete(int no) throws Exception;
-
-  //  Contact indexOf(String email);
+  int delete(String email) throws Exception;
 
   int indexOf(String email);
 
