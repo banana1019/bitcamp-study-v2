@@ -20,6 +20,4 @@ public interface ContactDao {
 
   int delete(String email) throws Exception;
 
-  int indexOf(String email);
-
 }

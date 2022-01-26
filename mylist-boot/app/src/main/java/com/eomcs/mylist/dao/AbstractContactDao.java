@@ -77,8 +77,7 @@ public abstract class AbstractContactDao implements ContactDao {
     return 1;
   }
 
-  @Override
-  public int indexOf(String email) {
+  private int indexOf(String email) {
     for (int i = 0; i < contactList.size(); i++) {
       Contact contact =  (Contact) contactList.get(i);
       if (contact.getEmail().equals(email)) { 
