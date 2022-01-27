@@ -10,7 +10,7 @@ sourceCompatibility = '11'
 
 eclipse {
     project {
-        name = "project-app1"
+        name = "project-app1-server"
     }
 }
 
