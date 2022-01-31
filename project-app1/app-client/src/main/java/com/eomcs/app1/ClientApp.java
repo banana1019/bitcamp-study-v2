@@ -9,14 +9,15 @@ public class ClientApp {
   public static void main(String[] args) throws Exception {
     System.out.println("[계산기 클라이언트]");
 
-    if (args.length != 2) {
-      System.out.println("프로그램 아규먼트가 누락되었습니다.");
-      System.out.println("사용법: ClientApp 서버주소 사용자이름");
-      return;
-    }
+    Scanner keyScan = new Scanner(System.in);
 
-    String serverAddress = args[0];
-    String userName = args[1];
+    System.out.print("서버 주소? ");
+    String serverAddress = keyScan.nextLine();
+
+    System.out.print("이름? ");
+    String userName = keyScan.nextLine();
+
+    keyScan.close();
 
     // 서버 애플리케이션과 네트워크 연결을 수행한다.
     Socket socket = new Socket(serverAddress, 8888); // 서버와 연결될 때까지 객체를 생성하지 않는다.
