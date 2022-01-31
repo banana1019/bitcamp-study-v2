@@ -14,8 +14,8 @@ public class ClientApp {
     System.out.print("서버 주소? ");
     String serverAddress = keyScan.nextLine();
 
-    System.out.print("이름? ");
-    String userName = keyScan.nextLine();
+    System.out.print("계산식? ");
+    String input = keyScan.nextLine();
 
     keyScan.close();
 
@@ -28,7 +28,7 @@ public class ClientApp {
     Scanner in = new Scanner(socket.getInputStream());
 
     // 서버에 데이터를 보낸다.
-    out.println(userName);
+    out.println(input);
 
     // 서버가 응답한 데이터를 읽는다.
     String response = in.nextLine(); // 서버가 한 줄의 문자열을 보낼 때까지 리턴하지 않는다.

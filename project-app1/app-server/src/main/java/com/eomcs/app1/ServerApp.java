@@ -26,9 +26,32 @@ public class ServerApp {
 
       // 클라이언트와 주고받는 순서가 맞아야 한다.
       String request = in.nextLine();
-      System.out.println("이름: " + request);
+      System.out.println("요청 계산식: " + request);
 
-      out.println(request + "님 반갑습니다.");
+      // 클라이언트가 보낸 계산식을 분해한다.
+      String[] values = request.split(" ");
+
+      if (values.length != 3) {
+        out.println("계산식이 올바르지 않습니다.");
+      } else {
+        int a = Integer.parseInt(values[0]);
+        String op = values[1];
+        int b = Integer.parseInt(values[2]);
+        int result = 0;
+
+        switch (op) {
+          case "+": 
+            result = a + b;
+            out.printf("%d %s %d = %d\n", a, op, b, result);
+            break;
+          case "-": 
+            result = a - b;
+            out.printf("%d %s %d = %d\n", a, op, b, result);
+            break;
+          default:
+            out.println("지원하지 않는 연산자입니다.");
+        }
+      }
 
       // 클라이언트와의 연결을 끊음
       socket.close();
