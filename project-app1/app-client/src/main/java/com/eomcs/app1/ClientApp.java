@@ -11,11 +11,12 @@ public class ClientApp {
 
     Scanner keyScan = new Scanner(System.in);
 
-    System.out.print("서버 주소? ");
-    String serverAddress = keyScan.nextLine();
-
-    System.out.print("계산식? ");
+    System.out.print("요청(형식: 서버주소/연산자/값1/값2): ");
     String input = keyScan.nextLine();
+
+    int slashPos = input.indexOf("/");
+    String serverAddress = input.substring(0, slashPos);
+    String queryString = input.substring(slashPos + 1);
 
     keyScan.close();
 
@@ -28,7 +29,7 @@ public class ClientApp {
     Scanner in = new Scanner(socket.getInputStream());
 
     // 서버에 데이터를 보낸다.
-    out.println(input);
+    out.println(queryString);
 
     // 서버가 응답한 데이터를 읽는다.
     String response = in.nextLine(); // 서버가 한 줄의 문자열을 보낼 때까지 리턴하지 않는다.
