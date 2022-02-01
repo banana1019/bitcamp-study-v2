@@ -25,6 +25,9 @@ public class Worker extends Thread {
         out.println("jy: 계산식이 올바르지 않습니다.");
       } else {
         String op = values[0];
+        if (op.equals("%2f")) {
+          op = "/"; // %2f 문자열을 원래의 문자인 / 로 디코딩한다.
+        }
         int a = Integer.parseInt(values[1]);
         int b = Integer.parseInt(values[2]);
         int result = 0;
