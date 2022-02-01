@@ -18,9 +18,29 @@ public class Worker extends Thread {
       Scanner in = new Scanner(socket.getInputStream());
       PrintStream out = new PrintStream(socket.getOutputStream());
 
-      String queryString = in.nextLine();
-      String[] values = queryString.split("/");
+      // 1) HTTP 요청 데이터 읽기 (request-line)
+      String requestLine = in.nextLine();
+      System.out.println(requestLine);
 
+      // 나머지 데이터는 버린다.
+      while (true) {
+        String str = in.nextLine();
+        if (str.length() == 0) {
+          break;
+        }
+      }
+
+      String response = "Hello!";
+
+      // 2) HTTP 응답 데이터 보내기
+      out.println("HTTP/1.1 200 OK");
+      out.println("Content-Type: text/plain; charset=UTF-8");
+      out.printf("Content-Length: %d\n", response.length());
+      out.println();
+      out.println(response);
+      out.flush();
+
+      /*
       if (values.length != 3) {
         out.println("jy: 계산식이 올바르지 않습니다.");
       } else {
@@ -53,6 +73,7 @@ public class Worker extends Thread {
             out.println("jy: 지원하지 않는 연산자입니다.");
         }
       }
+       */
 
       socket.close();
       System.out.println("클라이언트 연결 종료!");
