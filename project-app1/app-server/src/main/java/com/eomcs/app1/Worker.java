@@ -30,15 +30,18 @@ public class Worker extends Thread {
         }
       }
 
-      String response = "Hello!";
+      // 예) requestLine = "GET /plus/100/200 HTTP/1.1"
+      String requestUri = requestLine.split(" ")[1]; // 예) "/plus/100/200"
+      String[] values = requestUri.split("/"); // 예) {"", "plus", "100", "200"}
 
-      // 2) HTTP 응답 데이터 보내기
-      out.println("HTTP/1.1 200 OK");
-      out.println("Content-Type: text/plain; charset=UTF-8");
-      out.printf("Content-Length: %d\n", response.length());
-      out.println();
-      out.println(response);
-      out.flush();
+      String op = values[1]; // "plus"
+      int a = Integer.parseInt(values[2]); // 100
+      int b = Integer.parseInt(values[3]); // 200
+
+      System.out.printf("%s, %d, %d\n", op, a, b);
+
+      String response = null;
+
 
       /*
       if (values.length != 3) {
@@ -74,6 +77,14 @@ public class Worker extends Thread {
         }
       }
        */
+
+      // 2) HTTP 응답 데이터 보내기
+      out.println("HTTP/1.1 200 OK");
+      out.println("Content-Type: text/plain; charset=UTF-8");
+      out.printf("Content-Length: %d\n", response.length());
+      out.println();
+      out.println(response);
+      out.flush();
 
       socket.close();
       System.out.println("클라이언트 연결 종료!");
