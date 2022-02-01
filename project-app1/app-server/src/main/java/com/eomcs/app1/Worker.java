@@ -75,9 +75,8 @@ public class Worker extends Thread {
   private void writeResponse(PrintStream out, String messageBody) throws Exception {
     out.println("HTTP/1.1 200 OK");
     out.println("Content-Type: text/plain; charset=UTF-8");
-    out.printf("Content-Length: %d\n", messageBody.length());
     out.println();
-    out.println(messageBody);
+    out.print(messageBody);
     out.flush();
-  }  
+  }
 }
