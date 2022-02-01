@@ -34,57 +34,34 @@ public class Worker extends Thread {
       String requestUri = requestLine.split(" ")[1]; // 예) "/plus/100/200"
       String[] values = requestUri.split("/"); // 예) {"", "plus", "100", "200"}
 
-      String op = values[1]; // "plus"
-      int a = Integer.parseInt(values[2]); // 100
-      int b = Integer.parseInt(values[3]); // 200
+      if (values.length == 4) {
+        String op = values[1]; // "plus"
+        int a = Integer.parseInt(values[2]); // 100
+        int b = Integer.parseInt(values[3]); // 200
+        System.out.printf("%s, %d, %d\n", op, a, b);
 
-      System.out.printf("%s, %d, %d\n", op, a, b);
-
-      String response = null;
-
-
-      /*
-      if (values.length != 3) {
-        out.println("jy: 계산식이 올바르지 않습니다.");
-      } else {
-        String op = values[0];
-        if (op.equals("%2f")) {
-          op = "/"; // %2f 문자열을 원래의 문자인 / 로 디코딩한다.
-        }
-        int a = Integer.parseInt(values[1]);
-        int b = Integer.parseInt(values[2]);
-        int result = 0;
+        String response = null;
 
         switch (op) {
-          case "+": 
-            result = a + b;
-            out.printf("jy: %d %s %d = %d\n", a, op, b, result);
+          case "plus":
+            response = String.format("jy: %d + %d = %d", a, b, (a + b));
             break;
-          case "-": 
-            result = a - b;
-            out.printf("jy: %d %s %d = %d\n", a, op, b, result);
+          case "minus": 
+            response = String.format("jy: %d - %d = %d", a, b, (a - b));
             break;
-          case "/": 
-            result = a / b;
-            out.printf("jy: %d %s %d = %d\n", a, op, b, result);
+          case "multiple": 
+            response = String.format("jy: %d * %d = %d", a, b, (a * b));
             break;
-          case "*": 
-            result = a * b;
-            out.printf("jy: %d %s %d = %d\n", a, op, b, result);
+          case "divide": 
+            response = String.format("jy: %d / %d = %d", a, b, (a / b));
             break;
           default:
-            out.println("jy: 지원하지 않는 연산자입니다.");
+            response = "jy: 지원하지 않는 연산자입니다.";
         }
+        writeResponse(out, response);
+      } else {
+        writeResponse(out, "요청 형식이 올바르지 않습니다.");
       }
-       */
-
-      // 2) HTTP 응답 데이터 보내기
-      out.println("HTTP/1.1 200 OK");
-      out.println("Content-Type: text/plain; charset=UTF-8");
-      out.printf("Content-Length: %d\n", response.length());
-      out.println();
-      out.println(response);
-      out.flush();
 
       socket.close();
       System.out.println("클라이언트 연결 종료!");
@@ -93,4 +70,14 @@ public class Worker extends Thread {
       e.printStackTrace();
     }
   }
+
+  // HTTP 응답 데이터 보내기
+  private void writeResponse(PrintStream out, String messageBody) throws Exception {
+    out.println("HTTP/1.1 200 OK");
+    out.println("Content-Type: text/plain; charset=UTF-8");
+    out.printf("Content-Length: %d\n", messageBody.length());
+    out.println();
+    out.println(messageBody);
+    out.flush();
+  }  
 }
