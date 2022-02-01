@@ -39,11 +39,11 @@ public class Worker extends Thread {
             out.printf("%d %s %d = %d\n", a, op, b, result);
             break;
           case "/": 
-            for (int i = 0; i < 100000000; i++) {
-              result = (int) (Math.random() * Math.random() * Math.sin(0.45));
-              result += (int) (Math.random() * Math.random() * Math.sin(0.45));
-            }
             result = a / b;
+            out.printf("%d %s %d = %d\n", a, op, b, result);
+            break;
+          case "*": 
+            result = a * b;
             out.printf("%d %s %d = %d\n", a, op, b, result);
             break;
           default:
