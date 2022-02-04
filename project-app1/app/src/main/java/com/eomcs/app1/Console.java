@@ -11,7 +11,7 @@ public class Console {
     System.out.print("> ");
     String[] values = keyScan.nextLine().split(" ");
 
-    return new Command(values[0], Arrays.copyOfRange(values, 1, values.length));
+    return new Command(values[0], Arrays.copyOfRange(values, 1, values.length)); 
   }
 
   void close() {
