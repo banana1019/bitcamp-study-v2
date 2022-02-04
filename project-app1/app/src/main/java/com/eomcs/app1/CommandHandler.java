@@ -2,9 +2,9 @@ package com.eomcs.app1;
 
 public class CommandHandler {
   void doHelp() {
-    System.out.println("add   [값1] [값2]      더하기 계산을 수행한다. 예) App add 100 200");
-    System.out.println("minus [값1] [값2]      빼기 계산을 수행한다.   예) App minus 100 200");
-    System.out.println("help 도움말을 출력한다.");
+    System.out.println("add   [값1] [값2]      더하기 계산을 수행한다.");
+    System.out.println("minus [값1] [값2]      빼기 계산을 수행한다.");
+    System.out.println("help                   도움말을 출력한다.");
   }
 
   void doAdd(Command command) {

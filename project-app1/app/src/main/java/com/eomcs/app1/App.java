@@ -2,7 +2,6 @@ package com.eomcs.app1;
 
 public class App {
 
-
   public static void main(String[] args) {
 
     Console console = new Console();
@@ -10,7 +9,6 @@ public class App {
 
     while (true) {
       Command command = console.prompt();
-
       if (command.getName().equals("quit") || command.getName().equals("exit")) {
         break;
       } else if (command.getName().equals("")) {
@@ -25,7 +23,6 @@ public class App {
         System.out.println("지원하지 않는 연산자입니다.");
       }
     }
-
 
     console.close();
   }

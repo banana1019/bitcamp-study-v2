@@ -33,18 +33,18 @@ public class Worker extends Thread {
 
       // 예) requestLine = "GET /+/100/200 HTTP/1.1"
       String requestUri = requestLine.split(" ")[1]; // 예) "/+/100/200"
-      String[] values = requestUri.split("/"); // 예) {"", "plus", "100", "200"}
+      String[] values = requestUri.split("/"); // 예) {"", "+", "100", "200"}
 
       if (values.length == 4) {
         String op = URLDecoder.decode(values[1], "UTF-8"); // "%2b" -> "+", "-", "*", "%2f" -> "/"
-        int a = Integer.parseInt(values[2]); // 100
-        int b = Integer.parseInt(values[3]); // 200
+        int a = Integer.parseInt(values[2]); // "100"
+        int b = Integer.parseInt(values[3]); // "200"
         System.out.printf("%s, %d, %d\n", op, a, b);
 
         String response = null;
 
         switch (op) {
-          case "+":
+          case "+": 
             response = String.format("jy: %d + %d = %d", a, b, (a + b));
             break;
           case "-": 
@@ -60,6 +60,7 @@ public class Worker extends Thread {
             response = "jy: 지원하지 않는 연산자입니다.";
         }
         writeResponse(out, response);
+
       } else {
         writeResponse(out, "요청 형식이 올바르지 않습니다.");
       }
