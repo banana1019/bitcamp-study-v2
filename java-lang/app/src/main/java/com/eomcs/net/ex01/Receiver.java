@@ -20,7 +20,7 @@ public class Receiver {
     //     - 가능한 이 범위의 포트 번호는 사용하지 않는 것이 좋다.
     //   - 유명 프로그램의 포트 번호도 가능한 한 사용하지 말라.
     //     - 예) Oracle DBMS(1521), MySQL DBMS(3306) 등
-    //   - 같은 컴퓨터에서 다른 프로그램이 이미 사용 중인 포트 번호는 지정할 수 없다.
+    //   - 같은 컴퓨터에서 다른 프로그램이 이미 사용중인 포트 번호는 지정할 수 없다.
     //     - 포트 번호는 중복으로 사용될 수 없다.
     ServerSocket serverSocket = new ServerSocket(8888);
     System.out.println("ServerSocket 생성!");
