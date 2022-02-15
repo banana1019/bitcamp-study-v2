@@ -2,7 +2,7 @@
 package com.eomcs.oop.ex12;
 
 
-public class Exam0510 {
+public class Exam0510x {
 
   static class MyCalculator {
     public static int plus(int a, int b) {return a + b;}
@@ -16,7 +16,46 @@ public class Exam0510 {
   }
 
   public static void main(String[] args) {
-    // 추상 메서드 한 개짜리 인터페이스의 구현체를 만들 때,
+
+    // 1) 로컬 클래스
+    System.out.println(c1.compute(200, 17));
+
+    // 1) 익명 클래스
+    System.out.println(c2.compute(200, 17));
+
+    // 3) 람다
+    System.out.println(c3.compute(200, 17));
+
+    // 4) 메서드 레퍼런스
+    System.out.println(c4.compute(200, 17));
+
+    class CalculatorImpl implements Calculator {
+      @Override
+      public int compute(int x, int y) {
+        return x + y;
+      }
+    }
+
+    class CalculatorImpl2 implements Calculator {
+      @Override
+      public int compute(int x, int y) {
+        return MyCalculator.plus(x, y);
+      }
+    }
+
+    Calculator calc2 = new Calculator() {
+      @Override
+      public int compute(int x, int y) {
+        return MyCalculator.plus(x, y);
+      }
+    };
+
+    Calculator calc3 = (x, y) -> MyCalculator.plus(x, y);
+
+    Calculator calc4 = MyCalculator::plus;
+    System.out.println(calc4.compute(100, 200));
+
+    // 메서드 한 개짜리 인터페이스의 구현체를 만들 때,
 
     // 1) 익명 클래스 활용
     Calculator obj1 = new Calculator() {
@@ -26,7 +65,7 @@ public class Exam0510 {
       }
     };
 
-    // 2) 람다 문법 활용
+    // 2) 람바 문법 활용
     Calculator obj2 = (x, y) -> x * y;
 
     // 3) 기존에 작성한 클래스의 스태틱 메서드를 재활용하기

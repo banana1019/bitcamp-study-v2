@@ -28,6 +28,6 @@ public class Exam0111 {
     A2.X obj = outer.new X(); // => new X(outer)
 
     // 물론 다음과 같이 위의 두 줄을 한 줄로 표현할 수 있다.
-    A2.X obj2 = new A2().new X(); // => new X(new A2())
+    A2.X obj2 = new A2().new X(); // 컴파일러는 다음 코드로 변경한다. => new X(new A2())
   }
 }
