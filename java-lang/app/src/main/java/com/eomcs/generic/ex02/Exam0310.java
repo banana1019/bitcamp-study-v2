@@ -15,7 +15,11 @@ public class Exam0310 {
     map.put("aaa", "문자열");
     map.put(new Integer(100), new Member("홍길동", 20));
 
-    // 위와 같이 제네릭 정보를 넘기지 않는 것 보다,
+    System.out.println(map.get("aaa"));
+    System.out.println(map.get(100));
+    System.out.println("---------------------------------------------");
+
+    // 위와 같이 제네릭 정보를 넘기지 않는 것보다,
     // 차라리 다음과 같이 명확하게 Object 타입을 지정하는 것이 좋다. 
     // => 어떤 타입의 key와 어떤 타입의 value를 저장할 것인지
     //    다른 개발자에게 명확하게 알려주는 효과가 있기 때문에 다음을 권장한다.

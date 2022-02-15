@@ -2,9 +2,9 @@ package com.eomcs.algorithm.data_structure.array2.step3;
 
 import java.util.Arrays;
 
-// ArrayList 클래스에서 다룰 항목의 타입을 파라미터로 받는다.
-// => 외부에서 타입 정보를 받는 파라미터를 "타입 파라미터(type parameter)"라고 부른다.
-public class ArrayList<itemType> {
+// 타입 파라미터의 이름
+// => T(Type), E(Element), K(Key), V(Value), N(Number), S/U/V 
+public class ArrayList<E> {
 
   private static final int DEFAULT_CAPACITY = 5;
   private Object[] elementData;
@@ -22,7 +22,7 @@ public class ArrayList<itemType> {
     }
   }
 
-  public boolean add(itemType e) {
+  public boolean add(E e) {
     if (size == elementData.length) {
       grow();
     }
@@ -44,7 +44,7 @@ public class ArrayList<itemType> {
   }
 
 
-  public void add(int index, itemType element) {
+  public void add(int index, E element) {
     if (size == elementData.length) {
       grow();
     }
@@ -59,20 +59,20 @@ public class ArrayList<itemType> {
   }
 
   @SuppressWarnings("unchecked")
-  public itemType get(int index) {
+  public E get(int index) {
     if (index < 0 || index >= size) {
       throw new ArrayIndexOutOfBoundsException("인덱스가 유효하지 않습니다.");
     }
-    return (itemType) elementData[index];
+    return (E) elementData[index];
   }
 
-  public Object set(int index, Object element) {
+  public E set(int index, E element) {
     if (index < 0 || index >= size) {
       throw new ArrayIndexOutOfBoundsException("인덱스가 유효하지 않습니다.");
     }
     Object old = elementData[index];
     elementData[index] = element;
-    return old;
+    return (E) old;
   }
 
   public Object remove(int index) {

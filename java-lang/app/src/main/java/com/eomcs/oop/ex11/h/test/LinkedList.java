@@ -96,7 +96,7 @@ public class LinkedList {
   public Iterator iterator() {
     // anonymous class 활용 예
     // => 오직 한 개의 인스턴스만 생성할 경우
-    // => return문, 할당문, 파라미터 전달하는 곳에 직접 놓기
+    // => return문, 할당문, 파라미터 전달하는 곳에 놓기
     //
     return new Iterator() {
       int cursor;

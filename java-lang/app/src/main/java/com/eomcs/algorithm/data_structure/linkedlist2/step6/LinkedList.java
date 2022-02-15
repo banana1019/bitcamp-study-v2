@@ -99,7 +99,7 @@ public class LinkedList {
   public Iterator iterator() {
     // Anonymous Class 활용 예 2
     // => 오직 한 개의 인스턴스만 생성할 경우
-    // => return 문, 할당문, 파라미터 전달하는 놓기 
+    // => return 문, 할당문, 파라미터 전달하는 곳에 놓기
     //
     return new Iterator() {
       int cursor;
