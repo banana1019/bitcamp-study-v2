@@ -5,13 +5,15 @@
   <title>게시글</title>
 </head>
 <body>
+
 <h1>새 게시글</h1>
+
 <form>
-  제목* : <input id="x-title" type="text"><br>
-  내용* : <textarea id="x-content" cols="60" rows="10"></textarea><br>
-  별표(*) 항목은 필수 입력입니다.<br>
-  <button id="x-add-btn" type="button">등록</button>
-  <button id="x-cancel-btn" type="button">취소</button>
+제목*: <input id="x-title" type="text"><br>
+내용*: <textarea id="x-content" cols="60" rows="10"></textarea><br>
+별표(*) 항목은 필수 입력입니다.<br>
+<button id="x-add-btn" type="button">등록</button>
+<button id="x-cancel-btn" type="button">취소</button>
 </form>
 
 <script type="text/javascript">
@@ -27,18 +29,17 @@
     fetch(`/board/add?title=${xTitle.value}&content=${xContent.value}`)
       .then(function(response) {
         return response.text();
-        // return response.json(); // json 형식의 문자열을 자바스크립트 객체로
       })
       .then(function(text) {
         console.log(text);
         location.href = "index.html";
       });
-
   };
 
   document.querySelector("#x-cancel-btn").onclick = function() {
     window.location.href = "index.html";
   };
 </script>
+
 </body>
 </html>

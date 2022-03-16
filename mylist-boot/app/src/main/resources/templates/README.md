@@ -1,3 +1,3 @@
-# C:\Users\JYH\git\bitcamp-study\mylist-boot\app\src\main\resources\templates\README.md
+# src/main/resources/templates
 
-Thymeleaf와 같은 뷰 컴포넌트의 템플릿 리소스를 두는 폴더
+Thymeleaf 와 같은 뷰 컴포넌트의 템플릿을 두는 폴더

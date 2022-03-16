@@ -1,6 +1,5 @@
 package com.eomcs.mylist.controller;
 
-import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +11,8 @@ public class BoardController {
 
   // @Autowired
   // - 필드 선언부에 이 애노테이션을 붙여서 표시해 두면, 
-  //   Spring Boot가 실행될 때 BoardController 객체를 만들 때 BoardDao 구현체를 찾아 자동으로 주입한다.
+  //   Spring Boot가 BoardController 객체를 만들 때 BoardDao 구현체를 찾아 자동으로 주입한다. 
+  //
   @Autowired
   BoardDao boardDao;
 
@@ -22,40 +22,32 @@ public class BoardController {
   }
 
   @RequestMapping("/board/add")
-  public Object add(Board board) throws Exception {
-    board.setCreatedDate(new Date(System.currentTimeMillis()));
-    System.out.println(board);
-    boardDao.insert(board);
-    return boardDao.countAll();
+  public Object add(Board board) {
+    return boardDao.insert(board);
   }
 
 
   @RequestMapping("/board/get")
-  public Object get(int index) throws Exception {
-    Board board = boardDao.findByNo(index);
+  public Object get(int no) {
+    Board board = boardDao.findByNo(no);
     if (board == null) {
       return "";
     }
-    boardDao.increaseViewCount(index);
+    boardDao.increaseViewCount(no);
     return board;
   }
 
   @RequestMapping("/board/update")
-  public Object update(int index, Board board) throws Exception {
-    Board old = boardDao.findByNo(index);
-    if (old == null) {
-      return 0;
-    }
-
-    board.setViewCount(old.getViewCount());
-    board.setCreatedDate(old.getCreatedDate());
-
-    return boardDao.update(index, board);
+  public Object update(Board board) {
+    return boardDao.update(board);
   }
 
   @RequestMapping("/board/delete")
-  public Object delete(int index) throws Exception {
-    return boardDao.delete(index);
+  public Object delete(int no) {
+    return boardDao.delete(no);
   }
-
 }
+
+
+
+

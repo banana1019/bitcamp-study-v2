@@ -15,7 +15,7 @@ public class App {
     SpringApplication.run(App.class, args);
   }
 
-  // @Bean
+  //@Bean
   public CommandLineRunner commandLineRunner(ApplicationContext beanContainer) {
     return args -> {
 
@@ -24,7 +24,7 @@ public class App {
       String[] beanNames = beanContainer.getBeanDefinitionNames();
       for (int i = 0; i < beanNames.length; i++) {
         Object bean = beanContainer.getBean(beanNames[i]);
-        System.out.printf("----> %03d: %s\n", i+1, bean.getClass().getName());
+        System.out.printf("----> %03d: %s\n", i + 1, bean.getClass().getName());
       }
 
     };

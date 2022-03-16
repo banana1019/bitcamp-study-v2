@@ -8,19 +8,20 @@
 <h1>연락처</h1>
 <a href="form.html">새 연락처</a>
 <table id="x-contact-table" border="1">
-  <thead>
-    <tr>
-      <th>이름</th>
-      <th>이메일</th>
-      <th>전화</th>
-      <th>회사</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
+<thead>
+  <tr>
+    <th>번호</th>
+    <th>이름</th>
+    <th>이메일</th>
+    <th>전화</th>
+    <th>회사</th>
+  </tr>
+</thead>
+<tbody>
+</tbody>
 </table>
-<script type="text/javascript">
 
+<script type="text/javascript">
   var tbody = document.querySelector("#x-contact-table tbody")
 
   fetch("/contact/list")
@@ -28,41 +29,25 @@
       return response.json();
     })
     .then(function(contacts) {
-      console.log(contacts);
       for (var contact of contacts) {
         var tr = document.createElement("tr");
-        tr.innerHTML = `<td><a href="view.html?email=${contact.email}">${contact.name}</a></td>
+        tr.innerHTML = `<td>${contact.no}</td>
+        <td><a href="view.html?no=${contact.no}">${contact.name}</a></td>
         <td>${contact.email}</td>
         <td>${contact.tel}</td>
         <td>${contact.company}</td>`;
         tbody.appendChild(tr);
       }
     });
-
-  // fetch("/contact/list")
-  //   .then(response => {
-  //     // console.log(response)
-  //     // console.log(response.json())
-  //     response.json();
-  //   })
-  //   .then(contacts => {
-  //     console.log(contacts)
-  //     for (var contact of contacts) {
-  //       var values = contact.split(",");
-  //       var tr = document.createElement("tr");
-  //       tr.innerHTML = `<td>${values[0]}</td>
-  //       <td>${values[1]}</td>
-  //       <td>${values[2]}</td>
-  //       <td>${values[3]}</td>`
-  //       tbody.appendChild(tr);
-  //     }
-  //   })
-    // .catch(error => console.error(error));
-    // .cath(error => {
-    //   alert("서버 실행 오류입니다.")
-    //   console.log(error);
-    // })
-
 </script>
+
+
+
+
+
+
+
+
+
 </body>
 </html>

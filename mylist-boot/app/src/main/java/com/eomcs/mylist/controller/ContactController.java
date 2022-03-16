@@ -24,12 +24,9 @@ public class ContactController {
   }
 
   @RequestMapping("/contact/get")
-  public Object get(String email) throws Exception {
-    Contact contact = contactDao.findByEmail(email);
-    if (contact == null) {
-      return "";
-    }
-    return contact;
+  public Object get(int no) {
+    Contact contact = contactDao.findByNo(no);
+    return contact != null ? contact : "";
   }
 
   @RequestMapping("/contact/update")
@@ -38,8 +35,12 @@ public class ContactController {
   }
 
   @RequestMapping("/contact/delete")
-  public Object delete(String email) throws Exception {
-    return contactDao.delete(email);
+  public Object delete(int no) throws Exception {
+    return contactDao.delete(no);
   }
 
 }
+
+
+
+
