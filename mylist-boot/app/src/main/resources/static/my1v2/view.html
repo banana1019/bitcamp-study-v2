@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>도서 목록</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Hahmlet&family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Hahmlet', serif;
+    }
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>도서 추가</h1>
+  <form>
+    id: <input id="x-id" type="text"><br>
+    도서명* : <input id="x-title" type="text"><br>
+    저자* : <input id="x-author" type="text"><br>
+    출판사 : <input id="x-publisher" type="text"><br>
+    가격 : <input id="x-price" type="text"><br>
+    별표(*) 항목은 필수 입력입니다.<br>
+    <button id="x-update-btn" type="button">변경</button>
+    <button id="x-delete-btn" type="button">삭제</button>
+    <button id="x-cancel-btn" type="button">취소</button>
+  </form>
+
+  <script type="text/javascript">
+
+    // 1) URL에서 쿼리 스트링을 추출한다.
+    var arr = location.href.split("?");
+    console.log(arr);
+
+    if (arr.length == 1) {
+      alert("요청 형식이 올바르지 않습니다.");
+      throw "URL 형식 오류!";
+    }
+
+    var qs = arr[1];
+    console.log(qs);
+
+    // 2) 쿼리 스트링에서 title 값을 추출한다.
+    var params = new URLSearchParams(qs);
+    var id = params.get("id");
+
+    // var title = null;
+    // var values = qs.split("&");
+    // for (var value of values) {
+    //   if (value.startsWith("title=")) {
+    //     title = value.split("=")[1];
+    //   break;
+    //   }
+    // }
+
+    if (id == null) {
+      alert("도서명 값이 없습니다.");
+      throw "파라미터 오류!";
+    }
+
+    console.log(id);
+
+    var xId = document.querySelector("#x-id");
+    var xTitle = document.querySelector("#x-title");
+    var xAuthor = document.querySelector("#x-author");
+    var xPublisher = document.querySelector("#x-publisher");
+    var xPrice = document.querySelector("#x-price");
+
+    // 3) 서버에서 데이터 가져오기
+    fetch(`/my1/get?id=${id}`)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(book) {
+        // 4) 도서 상세 정보를 화면에 출력한다.
+        var values = book.split(",");
+        xId.value = values[0];
+        xTitle.value = values[1];
+        xAuthor.value = values[2];
+        xPublisher.value = values[3];
+        xPrice.value = values[4];
+      })
+
+    // var book = "도서명1,김작가,출판사1,5000";
+    // var values = book.split(",");
+
+
+    // xTitle.value = values[0];
+    // xAuthor.value = values[1];
+    // xPublisher.value = values[2];
+    // xPrice.value = values[3];
+
+    document.querySelector("#x-update-btn").onclick = function() {
+      if (xTitle.value == "" || xAuthor.value == "") {
+        window.alert("필수 입력 항목이 비어 있습니다.");
+        return;
+      }
+
+      fetch(`/my1/update?id=${xId.value}title=${xTitle.value}&author=${xAuthor.value}&publisher=${xPublisher.value}&price=${xPrice.value}`)
+        .then(function(response) {
+          return response.text();
+        })
+        .then(function(text) {
+          console.log(text);
+          location.href = "index.html";
+        });
+    };
+
+    document.querySelector("#x-cancel-btn").onclick = function() {
+      window.location.href = "index.html";
+    };
+
+    document.querySelector("#x-delete-btn").onclick = function() {
+      fetch(`/my1/delete?id=${id}`)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(result) {
+          console.log(result);
+          location.href = "index.html";
+        })
+    };
+  </script>
+</body>
+</html>

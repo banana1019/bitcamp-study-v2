@@ -6,11 +6,25 @@
 <mapper namespace="com.eomcs.mylist.dao.ContactDao">
 
   <resultMap type="contact" id="contactMap">
+  
     <id column="contact_no" property="no"/>
     <result column="name" property="name"/>
-    <result column="tel" property="tel"/>
     <result column="email" property="email"/>
     <result column="company" property="company"/>
+    
+    <collection property="tels" ofType="contactTel">
+      <id column="ct_no" property="no"/>
+      <result column="tt_no" property="telTypeNo"/>
+      <result column="tel" property="tel"/>      
+    </collection>
+    
+  </resultMap>
+  
+  <resultMap type="contactTel" id="contactTelMap">
+    <id column="ct_no" property="no"/>
+    <result column="contact_no" property="contactNo"/>
+    <result column="tt_no" property="telTypeNo"/>
+    <result column="tel" property="tel"/>
   </resultMap>
 
   <select id="countAll" resultType="int">
@@ -19,65 +33,77 @@
   
   <select id="findAll" resultMap="contactMap">
     select 
-      contact_no,
-      name,
-      tel,
-      email,
-      company
-    from 
-      ml_contact 
+      c.contact_no,
+      c.name,
+      c.email,
+      c.company,
+      t.ct_no,
+      t.tt_no,
+      t.tel
+    from
+      ml_contact c
+      left outer join ml_cont_tel t on c.contact_no=t.contact_no
     order by 
-      name asc
+      c.name asc
   </select>
   
-  <insert id="insert" parameterType="contact">
-    insert into ml_contact(name,tel,email,company) 
-    values(#{name},#{tel},#{email},#{company})
+  <!-- 자동 증가된 PK 값을 받고 싶을 때! -->
+  <insert id="insert" parameterType="contact" keyProperty="no" keyColumn="contact_no" useGeneratedKeys="true">
+    insert into ml_contact(name,email,company) 
+    values(#{name},#{email},#{company})
   </insert>
   
   <select id="findByNo" resultMap="contactMap" parameterType="int">
     select 
-      contact_no,
-      name,
-      tel,
-      email,
-      company
+      c.contact_no,
+      c.name,
+      c.email,
+      c.company,
+      t.ct_no,
+      t.tt_no,
+      t.tel
     from 
-      ml_contact 
+      ml_contact  c
+      left outer join ml_cont_tel t on c.contact_no=t.contact_no
     where 
-      contact_no=#{no}
+      c.contact_no=#{no}
   </select>
 
   <select id="findByEmail" resultMap="contactMap" parameterType="string">
     select 
-      contact_no,
-      name,
-      tel,
-      email,
-      company
+      c.contact_no,
+      c.name,
+      c.email,
+      c.company,
+      t.ct_no,
+      t.tt_no,
+      t.tel
     from 
-      ml_contact 
+      ml_contact  c
+      left outer join ml_cont_tel t on c.contact_no=t.contact_no
     where 
-      email=#{email}
+      c.email=#{no}
   </select>
 
   <select id="findByName" resultMap="contactMap" parameterType="string">
     select 
-      contact_no,
-      name,
-      tel,
-      email,
-      company
+      c.contact_no,
+      c.name,
+      c.email,
+      c.company,
+      t.ct_no,
+      t.tt_no,
+      t.tel
     from 
-      ml_contact 
+      ml_contact  c
+      left outer join ml_cont_tel t on c.contact_no=t.contact_no
     where 
-      name=#{name}
+      c.name=#{no}
   </select>
   
   <update id="update" parameterType="contact">
     update ml_contact set 
       name=#{name}, 
-      tel=#{tel},
       email=#{email},
       company=#{company}
     where 
@@ -86,6 +112,49 @@
 
   <delete id="delete" parameterType="int">
     delete from ml_contact 
+    where contact_no=#{no}
+  </delete>
+  
+  <select id="findTelByContactNo" parameterType="int" resultMap="contactTelMap">
+    select
+      ct_no,
+      contact_no,
+      tt_no,
+      tel
+    from
+      ml_cont_tel
+    where
+      contact_no=#{no}
+  </select>
+  
+  <insert id="insertTel" parameterType="ContactTel">
+    insert into ml_cont_tel(contact_no, tt_no, tel)
+    values(#{contactNo}, #{telTypeNo}, #{tel});
+  </insert>
+  
+  <insert id="insertTels">
+    insert into ml_cont_tel(contact_no, tt_no, tel)
+    values
+    <foreach collection="tels" item="contactTel" separator=",">
+    (#{contactNo}, #{contactTel.telTypeNo}, #{contactTel.tel})
+    </foreach>
+  </insert>
+  
+  <update id="updateTel" parameterType="contactTel">
+    update ml_cont_tel set
+      tt_no=#{telTypeNo},
+      tel=#{tel}
+    where
+     ct_no=#{no}
+  </update>
+  
+  <delete id="deleteTel" parameterType="int">
+    delete from ml_cont_tel
+    where ct_no=#{no}
+  </delete>
+  
+  <delete id="deleteTelByContactNo" parameterType="int">
+    delete from ml_cont_tel
     where contact_no=#{no}
   </delete>
 

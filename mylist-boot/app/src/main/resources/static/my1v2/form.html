@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>도서 목록</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Hahmlet&family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Hahmlet', serif;
+    }
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>도서 추가</h1>
+  <form>
+    id: <input id="x-id" type="text"><br>
+    도서명* : <input id="x-title" type="text"><br>
+    저자* : <input id="x-author" type="text"><br>
+    출판사 : <input id="x-publisher" type="text"><br>
+    가격 : <input id="x-price" type="text"><br>
+    별표(*) 항목은 필수 입력입니다.<br>
+    <button id="x-add-btn" type="button">등록</button>
+    <button id="x-cancel-btn" type="button">취소</button>
+  </form>
+
+  <script type="text/javascript">
+    var idCount = 0
+
+    var xId = document.querySelector("#x-id");
+    var xTitle = document.querySelector("#x-title");
+    var xAuthor = document.querySelector("#x-author");
+    var xPublisher = document.querySelector("#x-publisher");
+    var xPrice = document.querySelector("#x-price");
+
+    xId.value = idCount++;
+
+    document.querySelector("#x-add-btn").onclick = function() {
+      if (xTitle.value == "" || xAuthor.value == "") {
+        window.alert("필수 입력 항목이 비어 있습니다.");
+        return;
+      }
+
+      fetch(`/my1/add?id=${xId.value}title=${xTitle.value}&author=${xAuthor.value}&publisher=${xPublisher.value}&price=${xPrice.value}`)
+        .then(function(response) {
+          return response.text();
+        })
+        .then(function(text) {
+          console.log(text);
+          location.href = "index.html";
+        });
+    };
+
+    document.querySelector("#x-cancel-btn").onclick = function() {
+      window.location.href = "index.html";
+    };
+  </script>
+</body>
+</html>

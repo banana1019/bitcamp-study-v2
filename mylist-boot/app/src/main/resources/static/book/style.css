@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  margin: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+#x-add {
+  font-size: 1.3em;
+}
+
+button {
+  margin-top: 10px;
+}
+
+input, textarea {
+  margin-bottom: 15px;
+}
+
+/*
+table {
+  border-collapse: collapse;
+}
+
+thead {
+  text-align: center;
+  background-color: #bbdefb;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+tbody td:nth-child(3)  {
+  text-align: center;
+}
+*/
