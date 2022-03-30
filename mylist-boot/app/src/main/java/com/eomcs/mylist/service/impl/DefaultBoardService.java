@@ -14,15 +14,18 @@ public class DefaultBoardService implements BoardService {
   @Autowired
   BoardDao boardDao;
 
+  @Override
   @Transactional
   public int add(Board board) {
     return boardDao.insert(board);
   }
 
+  @Override
   public List<Board> list() {
     return boardDao.findAll();
   }
 
+  @Override
   public Board get(int no) {
     Board board = boardDao.findByNo(no);
     if (board != null) {
@@ -31,14 +34,16 @@ public class DefaultBoardService implements BoardService {
     return board;
   }
 
+  @Override
   @Transactional
   public int update(Board board) {
     return boardDao.update(board);
   }
 
+  @Override
   @Transactional
-  public int delete(int no) {
-    return boardDao.delete(no);
+  public int delete(Board board) {
+    return boardDao.delete(board);
   }
 }
 

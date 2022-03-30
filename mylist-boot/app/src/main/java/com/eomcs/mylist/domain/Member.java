@@ -1,13 +1,13 @@
 package com.eomcs.mylist.domain;
 
-import java.util.List;
+import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class Contact {
+public class Member {
   int no;
   String name;
   String email;
-  String company;
-  List<ContactTel> tels;
+  String password;
+  Date registDate;
 }
