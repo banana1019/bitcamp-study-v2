@@ -29,9 +29,7 @@ public class BookController {
   }
 
   @RequestMapping("/book/add")
-  public Object add(Book book, MultipartFile file) throws Exception {
-
-    // 파일이 업로드 되었다면 저장한다.
+  public Object add(Book book, MultipartFile file) {
     try {
       book.setPhoto(saveFile(file));
       return bookService.add(book);
@@ -50,8 +48,7 @@ public class BookController {
   }
 
   @RequestMapping("/book/update")
-  public Object update(Book book, MultipartFile file) throws Exception{
-
+  public Object update(Book book, MultipartFile file) {
     try {
       book.setPhoto(saveFile(file));
       return bookService.update(book);
@@ -63,12 +60,13 @@ public class BookController {
   }
 
   @RequestMapping("/book/delete")
-  public Object delete(int no) throws Exception {
+  public Object delete(int no) {
     return bookService.delete(no);
   }
 
   @RequestMapping("/book/photo")
   public ResponseEntity<Resource> photo(String filename) {
+
     try {
       // 다운로드할 파일의 입력 스트림 자원을 준비한다.
       File downloadFile = new File("./upload/book/" + filename); // 다운로드 상대 경로 준비
@@ -85,15 +83,17 @@ public class BookController {
       // => 다운로드 파일을 지정하지 않으면 요청 URL이 파일명으로 사용된다.
       header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);
 
+
+
       //      // HTTP 응답 생성기를 사용하여 다운로드 파일의 응답 데이터를 준비한다.
       //      BodyBuilder http응답생성기 = ResponseEntity.ok(); // 요청 처리에 성공했다는 응답 생성기를 준비한다.
       //      http응답생성기.headers(header); // HTTP 응답 헤더를 설정한다.
-      //      http응답생성기.contentLength(0); // 응답 콘텐트의 파일 크기를 설정한다.
+      //      http응답생성기.contentLength(downloadFile.length()); // 응답 콘텐트의 파일 크기를 설정한다.
       //      http응답생성기.contentType(MediaType.APPLICATION_OCTET_STREAM); // 응답 데이터의 MIME 타입을 설정한다.
-      //
+      //      
       //      // 응답 데이터를 포장한다.
       //      ResponseEntity<Resource> 응답데이터 = http응답생성기.body(resource);
-      //
+      //      
       //      return 응답데이터; // 포장한 응답 데이터를 클라이언트로 리턴한다.
 
       return ResponseEntity.ok() // HTTP 응답 프로토콜에 따라 응답을 수행할 생성기를 준비한다.
@@ -103,19 +103,17 @@ public class BookController {
           .body(resource); // 응답 콘텐트를 생성한 후 리턴한다.
 
     } catch (Exception e) {
-      // e.printStackTrace();
+      //e.printStackTrace();
       System.out.println("요청한 파일이 없습니다!");
       return null;
     }
-
   }
 
+
   private String saveFile(MultipartFile file) throws Exception {
-
-    if (file != null && file.getSize() > 0) {
-
+    if (file != null && file.getSize() > 0) { 
       // 파일을 저장할 때 사용할 파일명을 준비한다.
-      String filename = UUID.randomUUID().toString(); // 임의의 파일명을 준비한다.
+      String filename = UUID.randomUUID().toString();
 
       // 파일명의 확장자를 알아낸다.
       int dotIndex = file.getOriginalFilename().lastIndexOf(".");
@@ -140,8 +138,9 @@ public class BookController {
       return null;
     }
   }
-}
 
+
+}
 
 
 

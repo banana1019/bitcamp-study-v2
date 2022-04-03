@@ -35,7 +35,7 @@
   </select>
   
   <insert id="insert" parameterType="book">
-    insert into ml_book(title,author,press,feed,read_date,page,price, photo) 
+    insert into ml_book(title,author,press,feed,read_date,page,price,photo) 
     values(#{title},#{author},#{press},#{feed},#{readDate},#{page},#{price},#{photo})
   </insert>
   
@@ -65,9 +65,9 @@
       read_date=#{readDate},
       page=#{page},
       price=#{price}
-      <if test="photo != null">
-        ,photo=#{photo}
-      </if>
+    <if test="photo != null">
+      ,photo=#{photo}
+    </if>
     where 
       book_no=#{no}
   </update>

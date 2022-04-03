@@ -8,7 +8,7 @@ import com.eomcs.mylist.dao.BoardDao;
 import com.eomcs.mylist.domain.Board;
 import com.eomcs.mylist.service.BoardService;
 
-@Service
+@Service // Spring IoC 컨테이너가 객체를 만들어 저장할 때 클래스 이름을 사용한다. 예) defaultBoardService
 public class DefaultBoardService implements BoardService {
 
   @Autowired

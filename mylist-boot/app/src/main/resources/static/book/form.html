@@ -37,18 +37,17 @@
       window.alert("필수 입력 항목이 비어 있습니다.");
       return;
     }
-
+    
     var fd = new FormData(document.forms.namedItem("form1"));
     
-    // 독서일을 지정하지 않았으면 서버에 보내지 않는다.
-    if (xReadDate.value == "") {
+    if (xReadDate.value == "") { // 독서일을 지정하지 않았으면 서버에 보내지 않는다.
     	fd.delete("readDate");
     }
     
-    fetch("/book/add", { // 비동기 방식으로 서버에 요청을 보낸다.
+    fetch("/book/add", { 
         method: "POST",
         body: fd
-      })
+      }) 
       .then(function(response) {
         return response.text();
       })

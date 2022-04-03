@@ -78,7 +78,7 @@
       xFeed.value = book.feed;
       
       if (book.photo != null) {
-      xPhoto.src = "photo?filename=" + book.photo;    	  
+    	  xPhoto.src = "photo?filename=" + book.photo;
       }
     });
 
@@ -91,20 +91,19 @@
       return;
     }
 	  
-	    var fd = new FormData(document.forms.namedItem("form1"));
+	  var fd = new FormData(document.forms.namedItem("form1"));
 	    
-	    // 독서일을 지정하지 않았으면 서버에 보내지 않는다.
-	    if (xReadDate.value == "") {
-	      fd.delete("readDate");
-	    }
+    if (xReadDate.value == "") { // 독서일을 지정하지 않았으면 서버에 보내지 않는다.
+      fd.delete("readDate");
+    }
     
-	    // 변경할 
-	    fd.append("no", no);
+    // 변경할 독서록 데이터의 PK 값을 FormData에 추가한다.
+    fd.append("no", no);
     
-    fetch("/book/update", { // 비동기 방식으로 서버에 요청을 보낸다.
+    fetch("/book/update", { 
         method: "POST",
         body: fd
-      })
+      }) 
       .then(function(response) {
         return response.text();
       })

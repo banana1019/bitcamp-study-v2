@@ -15,7 +15,7 @@
     <collection property="tels" ofType="contactTel">
       <id column="ct_no" property="no"/>
       <result column="tt_no" property="telTypeNo"/>
-      <result column="tel" property="tel"/>      
+      <result column="tel" property="tel"/>
     </collection>
     
   </resultMap>
@@ -40,7 +40,7 @@
       t.ct_no,
       t.tt_no,
       t.tel
-    from
+    from 
       ml_contact c
       left outer join ml_cont_tel t on c.contact_no=t.contact_no
     order by 
@@ -63,7 +63,7 @@
       t.tt_no,
       t.tel
     from 
-      ml_contact  c
+      ml_contact c
       left outer join ml_cont_tel t on c.contact_no=t.contact_no
     where 
       c.contact_no=#{no}
@@ -79,10 +79,10 @@
       t.tt_no,
       t.tel
     from 
-      ml_contact  c
+      ml_contact c
       left outer join ml_cont_tel t on c.contact_no=t.contact_no
     where 
-      c.email=#{no}
+      c.email=#{email}
   </select>
 
   <select id="findByName" resultMap="contactMap" parameterType="string">
@@ -95,10 +95,10 @@
       t.tt_no,
       t.tel
     from 
-      ml_contact  c
+      ml_contact c
       left outer join ml_cont_tel t on c.contact_no=t.contact_no
     where 
-      c.name=#{no}
+      c.name=#{name}
   </select>
   
   <update id="update" parameterType="contact">
@@ -114,29 +114,30 @@
     delete from ml_contact 
     where contact_no=#{no}
   </delete>
-  
-  <select id="findTelByContactNo" parameterType="int" resultMap="contactTelMap">
-    select
+
+  <select id="findTelByContactNo" 
+          parameterType="int" resultMap="contactTelMap">
+    select 
       ct_no,
       contact_no,
       tt_no,
       tel
-    from
+    from 
       ml_cont_tel
     where
       contact_no=#{no}
   </select>
-  
-  <insert id="insertTel" parameterType="ContactTel">
+
+  <insert id="insertTel" parameterType="contactTel">
     insert into ml_cont_tel(contact_no, tt_no, tel)
-    values(#{contactNo}, #{telTypeNo}, #{tel});
+    values(#{contactNo}, #{telTypeNo}, #{tel}) 
   </insert>
   
   <insert id="insertTels">
     insert into ml_cont_tel(contact_no, tt_no, tel)
     values
     <foreach collection="tels" item="contactTel" separator=",">
-    (#{contactNo}, #{contactTel.telTypeNo}, #{contactTel.tel})
+      (#{contactNo}, #{contactTel.telTypeNo}, #{contactTel.tel}) 
     </foreach>
   </insert>
   
@@ -144,20 +145,20 @@
     update ml_cont_tel set
       tt_no=#{telTypeNo},
       tel=#{tel}
-    where
-     ct_no=#{no}
+    where 
+      ct_no=#{no}
   </update>
   
   <delete id="deleteTel" parameterType="int">
-    delete from ml_cont_tel
+    delete from ml_cont_tel 
     where ct_no=#{no}
   </delete>
   
   <delete id="deleteTelByContactNo" parameterType="int">
-    delete from ml_cont_tel
+    delete from ml_cont_tel 
     where contact_no=#{no}
   </delete>
-
+  
 </mapper>
 
 

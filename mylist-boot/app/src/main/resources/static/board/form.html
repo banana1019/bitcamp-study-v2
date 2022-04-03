@@ -29,17 +29,17 @@
     var fd = new FormData(document.forms.namedItem("form1"));
     
     fetch("/board/add", {
-        method: "POST",
-        body: new URLSearchParams(fd)
+    	  method: "POST",
+    	  body: new URLSearchParams(fd)
       }).then(function(response) {
         return response.json();
       })
       .then(function(result) {
         if (result.status == "success") {
-          location.href = "index.html";
+        	location.href = "index.html";
         } else {
-          window.alert("게시글 등록 실패!");
-          console.log(result.data);
+        	window.alert("게시글 등록 실패!");
+        	console.log(result.data);
         }
       });
   };

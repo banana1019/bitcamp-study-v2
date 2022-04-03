@@ -9,7 +9,7 @@ import com.eomcs.mylist.domain.ContactTel;
 @Mapper
 public interface ContactDao {
 
-  int countAll(); // ==> <select id="com.eomcs.mylist.dao.ContactDao.countAll">...</select> 
+  int countAll(); 
 
   List<Contact> findAll();
 

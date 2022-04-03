@@ -76,17 +76,17 @@
     var fd = new FormData(document.forms.namedItem("form1"));
     
     fetch("/board/update", {
-        method: "POST",
-        body: new URLSearchParams(fd)
+    	  method: "POST",
+    	  body: new URLSearchParams(fd)
       }).then(function(response) {
         return response.json();
       })
       .then(function(result) {
         if (result.status == "success") {
-          location.href = "index.html";
+        	location.href = "index.html";
         } else {
-          window.alert("게시글 변경 실패!");
-          console.log(result.data);
+        	window.alert("게시글 변경 실패!");
+        	console.log(result.data);
         }
       });
   };
@@ -101,7 +101,7 @@
         return response.json();
       })
       .then(function(result) {
-        if (result.status == "success") {
+    	  if (result.status == "success") {
           location.href = "index.html";
         } else {
           window.alert("게시글 삭제 실패!");

@@ -107,39 +107,10 @@ alter table ml_contact
   - 메서드 파라미터 및 DAO 호출 코드 변경
 
 
-### 8단계 - TodoDao에 Mybatis를 적용한다.
-
-- Todo 데이터를 저장할 테이블을 생성한다.
-```
-create table ml_todo(
-  todo_no int not null,
-  title varchar(255) not null,
-  done boolean default false
-);
-
-alter table ml_todo
-  add constraint primary key (todo_no),
-  modify column todo_no int not null auto_increment;
-```
-
-- com.eomcs.mylist.domain.Todo 클래스 변경
-  - primary key 값을 저장할 no 필드를 추가한다.
-
-- com.eomcs.mylist.dao.TodoDao 인터페이스 변경
-  - 메서드의 파라미터 및 리턴 타입 변경
-  - Mybatis 설정 추가
-
-- com.eomcs.mylist.controller.TodoController 클래스 변경
-  - 메서드 파라미터 및 DAO 호출 코드 변경
-
 ## 프론트엔드 개발 실습
 
 - 독서록 관련 UI 변경
   - index.html, view.html
-- 연락처 관련 UI 변경
-  - index.html, view.html
-- To-do 관련 UI 변경
-  - index.html
 
 
 

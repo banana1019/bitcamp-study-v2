@@ -23,7 +23,7 @@
     from 
       ml_todo 
     order by 
-      todo_no asc
+      title asc
   </select>
   
   <insert id="insert" parameterType="todo">
